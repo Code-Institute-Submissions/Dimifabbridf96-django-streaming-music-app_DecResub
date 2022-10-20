@@ -1,1 +1,1 @@
-web:gunicorn spotiflix_music.wsgi
+web:gunicorn spotiflix-app.wsgi
