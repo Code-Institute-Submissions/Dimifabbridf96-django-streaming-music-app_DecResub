@@ -1,0 +1,1 @@
+web:gunicorn spotiflix_music.wsgi
