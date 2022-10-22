@@ -10,7 +10,7 @@ class Artist(models.Model):
     def __str__(self):
         return artist_name + artist_surname
 
-class Album(model.Model):
+class Album(models.Model):
     album_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'album_artist')
     album_title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField()
