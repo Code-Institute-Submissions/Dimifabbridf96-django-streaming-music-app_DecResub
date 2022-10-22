@@ -10,18 +10,6 @@ class Artist(models.Model):
     def __str__(self):
         return artist_name + artist_surname
 
-class Album(models.Model):
-    album_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'album_artist')
-    album_title = models.CharField(max_length=200, unique=True)
-    created_on = models.DateField()
-    genre = models.ForeignKey(Genre)
-    songs = models.ForeignKey(Song)
-    album_image = CloudinaryField('image', default='image')
-
-    def __str__(self):
-        return album_title
-
-
 class Genre(models.Model):
     GENRE = (
         ('R','Rock'),
@@ -37,6 +25,27 @@ class Genre(models.Model):
 
     def __str__(self):
         return genre
+
+class Song(models.Model):
+    song_title = models.CharField(max_length=50, unique=True)
+    song_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'song_artist')
+    uploaded_on = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return song_title
+
+class Album(models.Model):
+    album_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'album_artist')
+    album_title = models.CharField(max_length=200, unique=True)
+    created_on = models.DateField()
+    album_genre = models.ForeignKey(Genre, on_delete= models.CASCADE)
+    songs = models.ForeignKey(Song, on_delete=models.CASCADE)
+    album_image = CloudinaryField('image', default='image')
+
+    def __str__(self):
+        return album_title
+
+
 
 class Song(models.Model):
     song_title = models.CharField(max_length=50, unique=True)
