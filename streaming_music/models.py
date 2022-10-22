@@ -2,13 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
+def user_directory_path(instance, filename):
+    return 'user_{0}/{1}'.format(instance.user.id, filename)
+
+class MyModel(models.Model):
+    upload = models.FileField(upload_to=user_directory_path)
 
 class Artist(models.Model):
     artist_name = models.CharField(max_length=50)
     artist_surname = models.CharField(max_length=50)
 
     def __str__(self):
-        return artist_name + artist_surname
+        return self.artist_surname 
 
 class Genre(models.Model):
     GENRE = (
@@ -21,18 +26,19 @@ class Genre(models.Model):
 
     )
     genre = models.CharField(max_length=1, choices=GENRE)
-    other = models.CharField(max_length=20)
-
+    other = models.CharField(max_length=20, blank=True)
+    
     def __str__(self):
-        return genre
+        return self.genre
 
 class Song(models.Model):
     song_title = models.CharField(max_length=50, unique=True)
     song_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'song_artist')
     uploaded_on = models.DateTimeField(auto_now=True)
+    
 
     def __str__(self):
-        return song_title
+        return self.song_title
 
 class Album(models.Model):
     album_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'album_artist')
@@ -40,21 +46,11 @@ class Album(models.Model):
     created_on = models.DateField()
     album_genre = models.ForeignKey(Genre, on_delete= models.CASCADE)
     songs = models.ForeignKey(Song, on_delete=models.CASCADE)
-    album_image = CloudinaryField('image', default='image')
+    album_image = CloudinaryField('album cover', default='image')
 
     def __str__(self):
-        return album_title
+        return self.album_title
 
-
-
-class Song(models.Model):
-    song_title = models.CharField(max_length=50, unique=True)
-    song_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name = 'song_artist')
-    uploaded_on = models.DateTimeField(auto_now=True)
-    song_album = models.ForeignKey(Album, on_delete=models.on_delete.CASCADE, related_name = 'song_album')
-
-    def __str__(self):
-        return song_title
 
     
 
