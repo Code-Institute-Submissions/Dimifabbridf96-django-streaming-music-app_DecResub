@@ -62,6 +62,7 @@ class Album(models.Model):
     songs = models.ForeignKey(Song, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
     album_image = CloudinaryField('album cover', default='image')
+    description = models.TextField(default='description')
 
     class Meta:
         ordering = ['created_on']

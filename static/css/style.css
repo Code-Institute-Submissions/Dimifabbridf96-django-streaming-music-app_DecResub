@@ -1,0 +1,11 @@
+.nav-link{
+    color: black;
+    font-size: 30px;
+}
+.navbar-brand{
+    font-size: 40px;
+}
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
