@@ -1,6 +1,7 @@
 from . import views
-from django.urls import path
+from django.urls import path, include
 
 urlpatterns = [
-    path('', views.hello  , name='audio')
+    path('', views.AlbumList.as_view(), name='audio'),
+    path('summernote/', include('django_summernote.urls')),
 ]
