@@ -8,10 +8,10 @@
                 {% for album in album_list %}
                 <div class="col md-4">
                     <div class="card">
-                        <img src="{{ album_image }}" class="card-img-top">
+                        <img src="../static/image/spotiflix.jpg" class="card-img-top">
                         <div class="card-body">
                             <div class="card-body">
-                                <h3>{{ album_title }}</h3>
+                                <h3>{{ album.title }}</h3>
                                 <p class="card-text">
                                     {{ album.description }}
                                 </p>
@@ -27,5 +27,4 @@
          </div>
     </div>
 </div>
-<h2> My name is Dimitri</h2>
 {% endblock %}

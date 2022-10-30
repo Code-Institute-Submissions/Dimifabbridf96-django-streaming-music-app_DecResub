@@ -12,11 +12,11 @@ class MyModel(models.Model):
 
 
 class Artist(models.Model):
-    artist_name = models.CharField(max_length=50)
-    artist_surname = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.artist_surname 
+        return self.last_name
 
 
 class Genre(models.Model):
@@ -37,31 +37,30 @@ class Genre(models.Model):
 
 
 class Song(models.Model):
-    song_title = models.CharField(max_length=50, unique=True)
-    song_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='song_artist')
+    title = models.CharField(max_length=50, unique=True)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artist', null=True)
     uploaded_on = models.DateTimeField(auto_now=True)
-    song_file = models.FileField(upload_to='media/', default='song')
+    file = models.FileField(upload_to='media/', default='song')
     approved = models.BooleanField(default=False)
     likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
+    album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', null=True)
 
     class Meta:
         ordering = ['uploaded_on']
 
     def __str__(self):
-        return self.song_title
+        return self.title
     
     def number_of_likes(self):
         return self.likes.count()
 
 
 class Album(models.Model):
-    album_artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='album_artist')
-    album_title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField()
-    album_genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    songs = models.ForeignKey(Song, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
-    album_image = CloudinaryField('album cover', default='image')
+    image = CloudinaryField('album cover', default='image')
     description = models.TextField(default='description')
 
     class Meta:
@@ -71,7 +70,7 @@ class Album(models.Model):
         return self.likes.count()
     
     def __str__(self):
-        return self.album_title
+        return self.title
 
 
     

@@ -14,9 +14,9 @@ class GenreAdmin(admin.ModelAdmin):
 
 @admin.register(Song)
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('song_title','song_artist','uploaded_on', 'song_file')
-    search_fields = ['song_title','song_artist','uploaded_on']
-    list_filter = ['song_title','song_artist','uploaded_on']
+    list_display = ('title', 'artist', 'uploaded_on', 'file')
+    search_fields = ['song_title', 'artist', 'uploaded_on']
+    list_filter = ['title', 'artist', 'uploaded_on']
     action = ['approve_song']
 
     def approve_song(request, self, queryset):
@@ -27,9 +27,9 @@ class SongAdmin(admin.ModelAdmin):
 
 @admin.register(Album)
 class AlbumAdmin(SummernoteModelAdmin):
-    list_display = ('album_artist', 'album_title', 'created_on', 'album_genre', 'songs', 'album_image', 'description')
-    search_fields = ['album_artist', 'album_title', 'created_on', 'album_genre']
-    list_filter = ['album_artist', 'album_title', 'created_on', 'album_genre']
+    list_display = ('title', 'created_on', 'genre', 'image', 'description')
+    search_fields = ['title', 'created_on', 'genre']
+    list_filter = ['title', 'created_on', 'genre']
     summernote_field = ('description',)
 
 
@@ -37,7 +37,6 @@ class AlbumAdmin(SummernoteModelAdmin):
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    list_display = ('artist_name', 'artist_surname')
-    search_fields = ['artist_surname',]
-
+    list_display = ('first_name', 'last_name')
+    search_fields = ['last_name', ]
 
