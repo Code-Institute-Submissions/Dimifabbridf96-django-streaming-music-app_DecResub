@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views import generic
+from django.shortcuts import render, get_object_or_404
+from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import *
 
@@ -12,9 +12,22 @@ class AlbumList(generic.ListView):
     queryset = Album.objects.order_by('created_on')
     template_name = 'albums.html'
 
-class SongList(generic.ListView):
-    model = Song
-    queryset = Song.objects.order_by('uploaded_on')
-    template_name = 'albums.html'
 
+class SongList(View):
+    def get(self, request, title, *args, **kwargs):
+        queryset = Album.objects.order_by('created_on')
+        album = get_object_or_404(queryset, title=title)
+        songs = Song.objects.all().filter(album=album)
+        liked = False
+        if album.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        return render(
+            request,
+            'albums_content.html',
+            {
+                'album': album,
+                'songs': songs,
+                'liked': liked
+            },
+        )
 

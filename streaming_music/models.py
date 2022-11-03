@@ -40,7 +40,6 @@ class Song(models.Model):
     title = models.CharField(max_length=50, unique=True)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artist', null=True)
     uploaded_on = models.DateTimeField(auto_now=True)
-    file = models.FileField(upload_to='media/', default='song')
     approved = models.BooleanField(default=False)
     likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
     album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', null=True)
@@ -63,6 +62,7 @@ class Album(models.Model):
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
     image = CloudinaryField('album cover', default='image')
     description = models.TextField(default='description')
+    
     
 
     class Meta:

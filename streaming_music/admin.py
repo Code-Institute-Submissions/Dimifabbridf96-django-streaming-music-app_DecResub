@@ -14,10 +14,10 @@ class GenreAdmin(admin.ModelAdmin):
 
 @admin.register(Song)
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist', 'uploaded_on', 'file')
+    list_display = ('title', 'artist', 'uploaded_on','file')
     search_fields = ['song_title', 'artist', 'uploaded_on']
     list_filter = ['title', 'artist', 'uploaded_on']
-    action = ['approve_song']
+    action = ['approve_song', 'delete']
 
     def approve_song(request, self, queryset):
         queryset.update(approved=True)
@@ -30,6 +30,7 @@ class AlbumAdmin(SummernoteModelAdmin):
     list_display = ('title', 'created_on', 'genre', 'image', 'description')
     search_fields = ['title', 'created_on', 'genre']
     list_filter = ['title', 'created_on', 'genre']
+    action = ['delete']
     summernote_field = ('description',)
 
 
@@ -39,4 +40,5 @@ class AlbumAdmin(SummernoteModelAdmin):
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name')
     search_fields = ['last_name', ]
+    action = ['delete']
 

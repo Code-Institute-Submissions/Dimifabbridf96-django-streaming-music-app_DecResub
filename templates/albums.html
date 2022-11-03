@@ -16,8 +16,10 @@
 
                         <div class="card-body">
                             <div class="card-body">
+                                <a href="{% url 'songs' album.title %}">
                                 <h3>{{ album.title }}</h3>
-                                <h3>{{ album.artist }}</h3>                                
+                                <h3>{{ album.artist }}</h3>     
+                                </a>                           
                                 <p class="card-text">
                                     {{ album.description }}
                                 </p>
@@ -33,4 +35,17 @@
          </div>
     </div>
 </div>
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 {% endblock %}

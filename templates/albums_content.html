@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+         <div class="col-12 md-8 left">
+            <div class="row">
+                <div class="card">
+                    {% if "default" in album.image.url %}
+                    <img src="../static/image/spotiflix.jpg" class="card-img-top">
+                    {% else %}
+                    <img src="{{ album.image.url }}" alt="album image" class="card-img-top two">
+                    {% endif %}
+                <div class="album">
+                <h1>album title: {{ album.title }}</h1>
+                <h2> Composer: {{ album.artist }}</h2>
+               
+                </div>
+                </div>
+                {% for song in songs %}
+                <div class="col-4">
+                <div class="card-title">
+                <h2> song: {{ song.title }}</h2>
+                </div>
+                <div class="card-subtitle mb-2 text-muted">
+                <h3> artist: {{ song.artist }}</h3>
+                </div>
+                <div> 
+                <audio src="{{ song.file.url }} controls"></audio>
+            </div>
+            </div>
+            </div>
+                {% endfor %}
+{% if is_paginated %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+<div style="display:flex;justify-content:center;align-items:center;margin-top: 100px;">
+    <p style="font-size: 50px;">Upload Your File Here..</p>
+</div>
+{% if audio_path%}
+    <div style="display:flex;justify-content:center;align-items:center;margin-top: 10px;">
+        <a href="{{audio_path}}">{{audio_path}}</a>
+    </div>
+{%endif%}
+<div id="fileform" style="display:flex;justify-content:center;align-items:center;margin-top: 10px;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="audio"><strong>Upload Audio: </strong></label>
+        <input type="file" name="audio" accept="audio/*"><br><br>
+        <label for="image"><strong>Upload Image: </strong></label>
+        <input type="file" name="image" accept="image/jpeg"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

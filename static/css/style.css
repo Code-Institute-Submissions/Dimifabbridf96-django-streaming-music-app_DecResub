@@ -9,3 +9,12 @@
     justify-content: flex-end;
 }
 
+.album{
+    background-color: #c0c0b2;
+    text-align: center;
+}
+
+.two{
+    max-height: auto;
+    width: auto;
+}
