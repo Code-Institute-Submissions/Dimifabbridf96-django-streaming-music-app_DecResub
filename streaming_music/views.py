@@ -12,4 +12,9 @@ class AlbumList(generic.ListView):
     queryset = Album.objects.order_by('created_on')
     template_name = 'albums.html'
 
+class SongList(generic.ListView):
+    model = Song
+    queryset = Song.objects.order_by('uploaded_on')
+    template_name = 'albums.html'
+
 
