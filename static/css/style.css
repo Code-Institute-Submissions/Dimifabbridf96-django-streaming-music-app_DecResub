@@ -18,3 +18,8 @@
     max-height: auto;
     width: auto;
 }
+.gray{
+    background-color: #e6e6cd;
+    margin: 10px;
+    padding: 5px;
+}

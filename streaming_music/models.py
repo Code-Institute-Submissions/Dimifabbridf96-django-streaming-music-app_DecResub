@@ -37,10 +37,11 @@ class Genre(models.Model):
 
 
 class Song(models.Model):
-    title = models.CharField(max_length=50, unique=True)
+    track = models.CharField(max_length=50, unique=True)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artist', null=True)
     uploaded_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
+    file = models.FileField()
     likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
     album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', null=True)
 

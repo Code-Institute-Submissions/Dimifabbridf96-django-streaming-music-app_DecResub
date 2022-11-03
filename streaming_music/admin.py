@@ -14,9 +14,9 @@ class GenreAdmin(admin.ModelAdmin):
 
 @admin.register(Song)
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('title', 'artist', 'uploaded_on','file')
-    search_fields = ['song_title', 'artist', 'uploaded_on']
-    list_filter = ['title', 'artist', 'uploaded_on']
+    list_display = ('track', 'artist', 'uploaded_on','file')
+    search_fields = ['track', 'artist', 'uploaded_on']
+    list_filter = ['track', 'artist', 'uploaded_on']
     action = ['approve_song', 'delete']
 
     def approve_song(request, self, queryset):

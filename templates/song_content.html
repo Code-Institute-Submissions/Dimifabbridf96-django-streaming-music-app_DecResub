@@ -19,14 +19,13 @@
                 </div>
                 {% for song in songs %}
                 <div class="col-4 gray ">
-                <a href="{% url 'song' song.title %}">
+                    <a href="{% url 'song' song.title %}"></a>
                 <div class="card-title">
                 <h2> song: {{ song.title }}</h2>
                 </div>
                 <div class="card-subtitle mb-2 text-muted">
                 <h3> artist: {{ song.artist }}</h3>
                 </div>
-                </a>
                 <div>
                     Composed on = {{ song.uploaded_on }}
                 </div>
