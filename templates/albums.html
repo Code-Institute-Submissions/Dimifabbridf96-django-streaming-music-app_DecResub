@@ -7,13 +7,6 @@
             <div class="row">
                 {% for album in album_list %}
                 <div class="col md-4">
-                    {% if "r" in album.genre %} 
-                    <div class="card red">
-                        {% if "default" in album.image.url %}
-                        <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
-                        {% else %}
-                        <img src="{{ album.image.url }}" alt="album image" class="card-img-top">
-
                     <div class="card">
                         {% if "default" in album.image.url %}
                         <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
@@ -25,7 +18,7 @@
                             <div class="card-body">
                                 <a href="{% url 'albums' album.title %}">
                                 <h3>{{ album.title }}</h3>
-                                <h3>{{ album.artist }}</h3>     
+                                <h3>{{ album.artist }}</h3>  
                                 </a>                           
                                 <p class="card-text">
                                     {{ album.description }}
