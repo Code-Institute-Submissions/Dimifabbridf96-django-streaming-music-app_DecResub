@@ -13,12 +13,13 @@
                         {% else %}
                         <img src="{{ album.image.url }}" alt="album image" class="card-img-top">
                         {% endif %}
-
+                        
                         <div class="card-body">
                             <div class="card-body">
                                 <a href="{% url 'albums' album.title %}">
                                 <h3>{{ album.title }}</h3>
                                 <h3>{{ album.artist }}</h3>  
+                                <h3>{{ album.genre }}</h3>
                                 </a>                           
                                 <p class="card-text">
                                     {{ album.description }}
@@ -30,6 +31,7 @@
                     </div>
                 </div>
                 {% endfor %}
+                <a href="/add"> Add Album</a>
             </div>
 
          </div>

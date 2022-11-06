@@ -8,6 +8,7 @@ from .models import *
 
 class AlbumList(generic.ListView):
     model = Album
+    model = Genre
     paginate_by = 10
     queryset = Album.objects.order_by('created_on')
     template_name = 'albums.html'
@@ -30,3 +31,7 @@ class AlbumView(View):
                 'liked': liked
             }
         )
+
+
+def addAlbum(request):
+    return render(request, 'add-album.html')
