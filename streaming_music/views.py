@@ -28,23 +28,5 @@ class AlbumView(View):
                 'album': album,
                 'songs': songs,
                 'liked': liked
-            },
+            }
         )
-
-
-class SongView(View):
-    def get(self, request, track, *args, **kwargs):
-        queryset = Song()
-        song = get_object_or_404(queryset, track=track)
-        liked = False
-        if album.likes.filter(id=self.request.user.id).exists():
-            liked = True
-        return render(
-            request,
-            'song_content.html',
-            {
-                'song': song,
-                'liked': liked
-            },
-        )
-        return HttpResponseRedirect(reverse('album_content', args=[track]))

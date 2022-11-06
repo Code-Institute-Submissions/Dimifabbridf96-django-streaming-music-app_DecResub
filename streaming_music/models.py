@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
+
 def user_directory_path(instance, filename):
     return 'user_{0}/{1}'.format(instance.user.id, filename)
 
@@ -37,11 +38,11 @@ class Genre(models.Model):
 
 
 class Song(models.Model):
-    track = models.CharField(max_length=50, unique=True)
+    title = models.CharField(max_length=50, unique=True)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artist', null=True)
     uploaded_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
-    file = models.FileField()
+    file = models.FileField(upload_to='media/', default='song')
     likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
     album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', null=True)
 

@@ -14,12 +14,11 @@
                 <h1>album title: {{ album.title }}</h1>
                 <h2> Composer: {{ album.artist }}</h2>
                 <h2> Created on: {{ album.created_on }}</h2>
-               
                 </div>
                 </div>
                 {% for song in songs %}
                 <div class="col-4 gray ">
-                <a href="{% url 'song' song.title %}">
+              
                 <div class="card-title">
                 <h2> song: {{ song.title }}</h2>
                 </div>
@@ -28,11 +27,12 @@
                 </div>
                 </a>
                 <div>
-                    Composed on = {{ song.uploaded_on }}
+                    Composed on: {{ song.uploaded_on }}
                 </div>
-                <div> 
-                <audio src="{{ song.file.url }} controls"></audio>
-            </div>
+                <audio src="../static/image/PANETTY_FREESTYLE_INSTAGRAM_FALLING_DOWN_Canzone_Restaurata.mp3" controls></audio>
+                <div>
+                    <p>Download me !<a href="../static/image/PANETTY_FREESTYLE_INSTAGRAM_FALLING_DOWN_Canzone_Restaurata.mp3"><i class="fa-solid fa-download"></i></a></p>
+                </div>
             
             </div>
             </div>
