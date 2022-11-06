@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Album</title>
-</head>
-<body>
-    <h1>Add Album:</h1>
-    <form action="add" method="POST">
+{% extends 'base.html' %}
+{% block content %}
 
-    
+{% load crispy_forms_tags %}
+
+    <h1>Add Album:</h1>
+    <p> Creator: {{ user.username }}</p>
+    <form method="POST" action="add">
+
+        {{ album_form | crispy }}
+        {% csrf_token %}
+
+        <button class="btn btn-signup btn-lg" type="submit"> Add the Album </button>
     </form>
-</body>
-</html>
+{% endblock %}

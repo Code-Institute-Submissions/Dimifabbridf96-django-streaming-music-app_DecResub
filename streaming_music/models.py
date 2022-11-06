@@ -30,7 +30,7 @@ class Genre(models.Model):
         ('M', 'Metal'),
 
     )
-    genre = models.CharField(max_length=1, choices=GENRE)
+    genre = models.CharField(max_length=10, choices=GENRE)
     other = models.CharField(max_length=20, blank=True)
     
     def __str__(self):

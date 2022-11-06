@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
 <div class="container-fluid">
     <div class="row">
          <div class="col-12 md-8 left">
@@ -33,7 +34,17 @@
                 <div>
                     <p>Download me !<a href="../static/image/PANETTY_FREESTYLE_INSTAGRAM_FALLING_DOWN_Canzone_Restaurata.mp3"><i class="fa-solid fa-download"></i></a></p>
                 </div>
+                
+
+                <h1>Add Album:</h1>
+                <p> Creator: {{ user.username }}</p>
+                <form action="add" method="POST">
             
+                    {{ album_form | crispy }}
+                    {% csrf_token %}
+            
+                    <button class="btn btn-signup btn-lg"> Add the Album </button>
+                </form>
             </div>
             </div>
                 {% endfor %}
