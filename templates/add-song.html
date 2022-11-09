@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+    <h1>Add Album:</h1>
+    <p> Creator: {{ user.username }}</p>
+    <form method="POST" action="{% url 'add1' %}" enctype="multipart/form-data">
+
+        {{ song_form | crispy }}
+        {% csrf_token %}
+
+        <button class="btn btn-signup btn-lg" type="submit"> Add the Song </button>
+    </form>
+{% endblock %}

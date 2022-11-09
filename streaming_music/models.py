@@ -59,8 +59,8 @@ class Song(models.Model):
 class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200, unique=True)
-    created_on = models.DateField()
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    created_on = models.DateField(auto_now=True)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
     image = CloudinaryField('album cover', default='image')
     description = models.TextField(default='description')

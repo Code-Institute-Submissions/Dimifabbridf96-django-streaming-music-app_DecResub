@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import *
-from .forms import AlbumForm
+from .forms import *
 
 
 # Create your views here.
@@ -37,13 +37,17 @@ class AlbumView(View):
 
 def addAlbum(request):
     if request.method == 'POST':
-        title = request.POST.get('title')
-        artist = request.POST.get('artist')
-        image = request.POST.get('image')
-        genre = request.POST.get('genre')
-        description = request.POST.get('description')
-        Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
+        title = request.POST['title']
+        #artist = request.POST['artist']
+        image = request.POST['image']
+        description = request.POST['description']
+        genre = request.POST['genre']
 
+        form = Album(title=title, image=image, description=description, genre=genre)
+        form.save()
+        #Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
+        if form.is_valid():
+            form.save()
         return redirect('AlbumList')
     return render(request, 'add-album.html',
     {
@@ -92,3 +96,51 @@ def addAlbum(request):
 #                'album_form': AlbumForm()
 #            }
 #        )
+
+
+def addArtist(request):
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        #title = request.POST['title']
+        ##artist = request.POST['artist']
+        #image = request.POST['image']
+        #description = request.POST['description']
+        #genre = request.POST['genre']
+#
+        #form = Album(title=title, image=image, description=description, genre=genre)
+        form1 = Artist(first_name=first_name, last_name=last_name)
+        #Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
+        form1.save()
+        return redirect('/')
+    return render(request, 'add-album.html',
+    {
+        'album_form': ArtistForm()
+    }
+    )
+
+
+def removeSong(request, id, title):
+    song = Song.objects.get(id=id)
+    song.delete()
+    return redirect('/')
+
+
+def addSong(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        artist = request.POST['artist']
+        album = request.POST['album']
+        file = request.FILES['file']
+
+        form = Song(title=title, artist=artist.id, album=album, file=file)
+        form2.save()
+        #Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
+        if form2.is_valid():
+            form2.save()
+        return redirect('/')
+    return render(request, 'add-song.html',
+    {
+        'song_form': SongForm()
+    }
+    )

@@ -10,13 +10,17 @@
                     <img src="../static/image/spotiflix.jpg" class="card-img-top">
                     {% else %}
                     <img src="{{ album.image.url }}" alt="album image" class="card-img-top two">
-                    {% endif %}
+                    {% endif %}}
                 <div class="album">
-                <h1>album title: {{ album.title }}</h1>
-                <h2> Composer: {{ album.artist }}</h2>
-                <h2> Created on: {{ album.created_on }}</h2>
+                    <h1>album title: {{ album.title }}</h1>
+                    <h2> Composer: {{ album.artist }}</h2>
+                    <h2> Created on: {{ album.created_on }}</h2>
+                    </div>
+
                 </div>
-                </div>
+                <div class="col align-self-center">
+                    <a href="add/"><button class="btn btn-success btn-lg">Add</button></a>
+                    </div>
                 {% for song in songs %}
                 <div class="col-4 gray ">
               
@@ -34,17 +38,12 @@
                 <div>
                     <p>Download me !<a href="../static/image/PANETTY_FREESTYLE_INSTAGRAM_FALLING_DOWN_Canzone_Restaurata.mp3"><i class="fa-solid fa-download"></i></a></p>
                 </div>
-                
-
-                <h1>Add Album:</h1>
-                <p> Creator: {{ user.username }}</p>
-                <form action="add" method="POST">
+                    <div class="col align-self-center">
+                    <a href="delete/{{ song.id }}"><button class="btn btn-danger btn-lg">Remove</button></a>
+                    </div>
+                </div>
+               
             
-                    {{ album_form | crispy }}
-                    {% csrf_token %}
-            
-                    <button class="btn btn-signup btn-lg"> Add the Album </button>
-                </form>
             </div>
             </div>
                 {% endfor %}

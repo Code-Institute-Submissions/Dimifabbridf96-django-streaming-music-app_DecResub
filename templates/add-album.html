@@ -5,7 +5,7 @@
 
     <h1>Add Album:</h1>
     <p> Creator: {{ user.username }}</p>
-    <form method="POST" action="add">
+    <form method="POST" action="{% url 'add' %}" enctype="multipart/form-data">
 
         {{ album_form | crispy }}
         {% csrf_token %}

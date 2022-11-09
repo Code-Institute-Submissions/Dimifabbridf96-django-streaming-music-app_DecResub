@@ -6,8 +6,14 @@
          <div class="col-12 md-8 left">
             <div class="row">
                 {% for album in album_list %}
+                
                 <div class="col md-4">
+                    {% if 'P' == 'album.genre' %}
+                    <div class="card pop">
+                    {% else %}
                     <div class="card">
+                    {% endif %}
+
                         {% if "default" in album.image.url %}
                         <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
                         {% else %}
@@ -32,6 +38,7 @@
                 </div>
                 {% endfor %}
                 <a href="/add"> Add Album</a>
+                <a href="/add1">Add Song</a>
             </div>
 
          </div>
