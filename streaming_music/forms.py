@@ -11,7 +11,7 @@ class AlbumForm(forms.ModelForm):
 class ArtistForm(forms.ModelForm):
     class Meta:
         model = Artist
-        fields = ('first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'image')
 
 
 class SongForm(forms.ModelForm):

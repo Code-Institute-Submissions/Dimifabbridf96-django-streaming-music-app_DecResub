@@ -34,7 +34,7 @@ class SongAdmin(admin.ModelAdmin):
 
 @admin.register(Artist)
 class ArtistAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name')
+    list_display = ('first_name', 'last_name', 'image')
     search_fields = ['last_name', ]
     action = ['delete']
 

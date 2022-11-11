@@ -1,7 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
-
 
 
 def user_directory_path(instance, filename):
@@ -15,6 +13,7 @@ class MyModel(models.Model):
 class Artist(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='django-image/')
 
     def __str__(self):
         return self.last_name
@@ -62,7 +61,7 @@ class Album(models.Model):
     created_on = models.DateField(auto_now=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
-    image = CloudinaryField('album cover', default='image')
+    image = models.ImageField(upload_to='django-image/', default='../static/image/spotiflix.jpg' )
     description = models.TextField(default='description')
     
     

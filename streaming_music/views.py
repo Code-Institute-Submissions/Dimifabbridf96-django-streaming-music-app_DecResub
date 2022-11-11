@@ -109,10 +109,11 @@ def addArtist(request):
         #genre = request.POST['genre']
 #
         #form = Album(title=title, image=image, description=description, genre=genre)
-        form1 = Artist(first_name=first_name, last_name=last_name)
+        form1 = ArtistForm(request.POST, request.FILES)
         #Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
         form1.save()
         return redirect('/')
+    
     return render(request, 'add-album.html',
     {
         'album_form': ArtistForm()
