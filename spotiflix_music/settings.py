@@ -146,8 +146,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-AWS_ACCESS_KEY_ID = 'AKIARTX3PL6G2GH6BLUQ'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = dj_database_url.parse(os.environ.get("AWS_ACCESS_KEY_ID"))
+AWS_SECRET_ACCESS_KEY = dj_database_url.parse(os.environ.get("AWS_SECRET_ACCESS_KEY"))
 AWS_STORAGE_BUCKET_NAME = 'streaming-music-app'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_FILE_OVERWRITE = False
