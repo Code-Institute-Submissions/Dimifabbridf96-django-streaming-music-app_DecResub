@@ -1,0 +1,50 @@
+.nav-link{
+    color: black;
+    font-size: 30px;
+}
+.navbar-brand{
+    font-size: 40px;
+}
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.album{
+    background-color: #c0c0b2;
+    text-align: center;
+}
+
+.two{
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+.gray{
+    background-color: #e6e6cd;
+    margin: 10px;
+    padding: 5px;
+}
+.rock{
+    background-color: red;
+}
+.pop{
+    background-color: aqua;
+}
+.metal{
+    background-color: black;
+}
+.jazz{
+    background-color: yellow;
+}
+.house{
+    background-color: gray;
+}
+.blues{
+    background-color: blue;
+}
+.padding{
+    padding: 20px;
+}

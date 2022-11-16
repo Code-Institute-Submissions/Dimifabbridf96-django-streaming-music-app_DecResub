@@ -9,7 +9,6 @@ from .forms import *
 
 class AlbumList(generic.ListView):
     model = Album
-    model = Genre
     paginate_by = 10
     queryset = Album.objects.order_by('created_on')
     template_name = 'albums.html'
@@ -39,22 +38,26 @@ def addAlbum(request):
     if request.method == 'POST':
         title = request.POST['title']
         #artist = request.POST['artist']
-        image = request.POST['image']
+        image = request.FILES['image']
         description = request.POST['description']
         genre = request.POST['genre']
 
         form = Album(title=title, image=image, description=description, genre=genre)
         form.save()
         #Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
-        if form.is_valid():
-            form.save()
-        return redirect('AlbumList')
+        form.save()
+        return redirect('/')
     return render(request, 'add-album.html',
     {
         'album_form': AlbumForm()
     }
     )
 
+
+def deleteAlbum(request, id, title):
+    album = Album.objects.get(id=id)
+    album.delete()
+    return redirect('/')
 
 #
    # def post(self, request, title, *args, **kwargs):
@@ -127,18 +130,16 @@ def removeSong(request, id, title):
     return redirect('/')
 
 
-def addSong(request):
+def addSong(request, title):
     if request.method == 'POST':
-        title = request.POST['title']
-        artist = request.POST['artist']
-        album = request.POST['album']
+        track = request.POST['title']
+        artist_name = request.POST['artist_name']
+        artist_surname = request.POST['artist_surname']
         file = request.FILES['file']
 
-        form = Song(title=title, artist=artist.id, album=album, file=file)
+        form2 = Song(title=track, artist_name=artist_name, artist_surname=artist_surname, file=file)
         form2.save()
         #Album.objects.create(title=title, artist=artist, genre=genre, image=image, description=description)
-        if form2.is_valid():
-            form2.save()
         return redirect('/')
     return render(request, 'add-song.html',
     {

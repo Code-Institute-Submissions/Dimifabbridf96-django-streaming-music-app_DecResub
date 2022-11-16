@@ -2,43 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-def user_directory_path(instance, filename):
-    return 'user_{0}/{1}'.format(instance.user.id, filename)
-
-
-class MyModel(models.Model):
-    upload = models.FileField(upload_to=user_directory_path)
-
-
-class Artist(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='django-image/')
-
-    def __str__(self):
-        return self.last_name
-
-
-class Genre(models.Model):
-    GENRE = (
-        ('R', 'Rock'),
-        ('J', 'Jazz'),
-        ('P', 'Pop'),
-        ('H', 'House'),
-        ('B', 'Blues'),
-        ('M', 'Metal'),
-
-    )
-    genre = models.CharField(max_length=10, choices=GENRE)
-    other = models.CharField(max_length=20, blank=True)
-    
-    def __str__(self):
-        return self.genre
-
-
 class Song(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artist', null=True)
+    artist_name = models.CharField(max_length=40)
+    artist_surname = models.CharField(max_length=30)
     uploaded_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
     file = models.FileField(upload_to='media/', default='song')
@@ -47,6 +14,7 @@ class Song(models.Model):
 
     class Meta:
         ordering = ['uploaded_on']
+        unique_together = ('artist_name', 'artist_surname')
 
     def __str__(self):
         return self.title
@@ -56,12 +24,12 @@ class Song(models.Model):
 
 
 class Album(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
+    artist = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField(auto_now=True)
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
+    genre = models.CharField(max_length=20)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
-    image = models.ImageField(upload_to='django-image/', default='../static/image/spotiflix.jpg' )
+    image = models.ImageField(upload_to='django-image/', default='https://streaming-music-app.s3.eu-west-1.amazonaws.com/static/image/spotiflix.jpg' )
     description = models.TextField(default='description')
     
     

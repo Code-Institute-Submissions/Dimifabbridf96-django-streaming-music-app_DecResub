@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'reset_migrations',
     'allauth.socialaccount',
     'django.contrib.staticfiles',
     'django_summernote',
@@ -146,8 +147,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-AWS_ACCESS_KEY_ID = dj_database_url.parse(os.environ.get("AWS_ACCESS_KEY_ID"))
-AWS_SECRET_ACCESS_KEY = dj_database_url.parse(os.environ.get("AWS_SECRET_ACCESS_KEY"))
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = 'streaming-music-app'
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_FILE_OVERWRITE = False

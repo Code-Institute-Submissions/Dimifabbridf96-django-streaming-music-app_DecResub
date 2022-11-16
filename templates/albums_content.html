@@ -7,19 +7,20 @@
             <div class="row">
                 <div class="card">
                     {% if "default" in album.image.url %}
-                    <img src="../static/image/spotiflix.jpg" class="card-img-top">
+                    <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/static/image/spotiflix.jpg" class="card-img-top">
                     {% else %}
                     <img src="{{ album.image.url }}" alt="album image" class="card-img-top two">
-                    {% endif %}}
+                    {% endif %}
                 <div class="album">
                     <h1>album title: {{ album.title }}</h1>
                     <h2> Composer: {{ album.artist }}</h2>
                     <h2> Created on: {{ album.created_on }}</h2>
+                    <a href="remove/{{ album.id }}"><button class="btn btn-danger btn-lg">Remove</button></a>
                     </div>
 
                 </div>
                 <div class="col align-self-center">
-                    <a href="add/"><button class="btn btn-success btn-lg">Add</button></a>
+                    <a href="add1/"><button class="btn btn-success btn-lg">Add</button></a>
                     </div>
                 {% for song in songs %}
                 <div class="col-4 gray ">
@@ -34,9 +35,9 @@
                 <div>
                     Composed on: {{ song.uploaded_on }}
                 </div>
-                <audio src="../static/image/PANETTY_FREESTYLE_INSTAGRAM_FALLING_DOWN_Canzone_Restaurata.mp3" controls></audio>
+                <audio src="{{ song.file.url }}" controls></audio>
                 <div>
-                    <p>Download me !<a href="../static/image/PANETTY_FREESTYLE_INSTAGRAM_FALLING_DOWN_Canzone_Restaurata.mp3"><i class="fa-solid fa-download"></i></a></p>
+                    <p>Download me !<a href="{{ song.file.url }}"><i class="fa-solid fa-download"></i></a></p>
                 </div>
                     <div class="col align-self-center">
                     <a href="delete/{{ song.id }}"><button class="btn btn-danger btn-lg">Remove</button></a>

@@ -21,9 +21,10 @@ from streaming_music.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('summernote/', include('django_summernote.urls')),  
-    path('add/', addArtist, name='add'),
-    path('add1/', addSong, name='add1'),
-    path('<slug:title>/delete/<int:id>', removeSong, name='delete'),
+    path('add/', addAlbum, name='add'),
+    path('<slug:title>/add1/', addSong, name='add1'),
+    path('<slug:title>/delete/<int:id>', removeSong, name='delete_song'),
+    path('<slug:title>/remove/<int:id>', deleteAlbum, name='delete_album'),
     path('', include('streaming_music.urls'), name='music_urls'),
     path('accounts/', include('allauth.urls')),    
 ]

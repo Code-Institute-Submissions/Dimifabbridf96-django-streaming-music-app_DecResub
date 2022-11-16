@@ -5,13 +5,6 @@ from django_summernote.admin import SummernoteModelAdmin
 
 
 
-@admin.register(Genre)
-class GenreAdmin(admin.ModelAdmin):
-    list_display = ('genre',)
-    search_fields = ['genre']
-    list_filter = ['genre']
-
-
 @admin.register(Album)
 class AlbumAdmin(SummernoteModelAdmin):
     list_display = ('title', 'created_on', 'genre', 'image', 'description')
@@ -23,18 +16,11 @@ class AlbumAdmin(SummernoteModelAdmin):
 
 @admin.register(Song)
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('title','artist','uploaded_on', 'file')
-    search_fields = ['song_title','artist','uploaded_on']
-    list_filter = ['title','artist','uploaded_on']
+    list_display = ('title','uploaded_on', 'file', 'artist_name', 'artist_surname')
+    search_fields = ['song_title','artist_name','artist_surname' ,'uploaded_on']
+    list_filter = ['title','artist_name', 'artist_surname','uploaded_on']
     action = ['approve_song']
 
     def approve_song(request, self, queryset):
         queryset.update(approved=True)
-
-
-@admin.register(Artist)
-class ArtistAdmin(admin.ModelAdmin):
-    list_display = ('first_name', 'last_name', 'image')
-    search_fields = ['last_name', ]
-    action = ['delete']
 
