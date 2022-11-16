@@ -130,7 +130,7 @@ def removeSong(request, id, title):
     return redirect('/')
 
 
-def addSong(request, title):
+def addSong(request):
     if request.method == 'POST':
         track = request.POST['title']
         artist_name = request.POST['artist_name']

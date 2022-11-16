@@ -10,7 +10,7 @@ class Song(models.Model):
     approved = models.BooleanField(default=False)
     file = models.FileField(upload_to='media/', default='song')
     likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
-    album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', null=True)
+    album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album')
 
     class Meta:
         ordering = ['uploaded_on']
@@ -24,7 +24,7 @@ class Song(models.Model):
 
 
 class Album(models.Model):
-    artist = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    artist = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField(auto_now=True)
     genre = models.CharField(max_length=20)
