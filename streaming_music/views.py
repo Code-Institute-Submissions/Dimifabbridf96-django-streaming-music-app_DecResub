@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 from .models import *
 from .forms import *
 
@@ -85,7 +86,11 @@ def addSong(request):
             last_name_artist = form2.cleaned_data['last_name_artist']
             album = form2.cleaned_data['album']
             file = request.FILES['file']
-            form2.save()
+            if file.content_type != 'audio/mpeg':
+                messages.error(request, 'Song not added, file needs to be mp3, please try again')
+            else:
+                form2.save()
+                messages.success(request, 'Song added succesfully')
         return redirect('/')
     return render(request, 'add-song.html',
     {
