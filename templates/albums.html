@@ -7,10 +7,20 @@
             <div class="row">
                 {% for album in album_list %}
                 
-                <div class="col md-4">
-                    {% if 'POP' in album.genre %}
-                    <div class="card pop">
+                <div class="col-6 md-4">
+                    {% if 'Rock' in album.genre %}
+                    <div class="card rock">
                     {% elif 'Metal' in album.genre %}
+                    <div class="card metal">
+                    {% elif 'Pop' in album.genre %}
+                    <div class="card pop">
+                    {% elif 'Jazz' in album.genre %}
+                    <div class="card jazz">
+                    {% elif 'Blues' in album.genre %}
+                    <div class="card blues">
+                    {% elif 'House' in album.genre %}
+                    <div class="card house">
+                    {% elif 'Other' in album.genre %}
                     <div class="card metal">
                     {% else %}
                     <div class="card">

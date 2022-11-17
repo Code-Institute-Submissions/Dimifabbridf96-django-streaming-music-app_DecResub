@@ -1,20 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+GENRE = [
+    ('Rock', 'Rock'),
+    ('Jazz', 'Jazz'),
+    ('Pop', 'Pop'),
+    ('House', 'House'),
+    ('Blues', 'Blues'),
+    ('Metal', 'Metal'),
+    ('Other', 'Other')
+]
 
 class Song(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    artist_name = models.CharField(max_length=40)
-    artist_surname = models.CharField(max_length=30)
+    first_name_artist = models.CharField(max_length=501)
+    last_name_artist = models.CharField(max_length=50)
     uploaded_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
     file = models.FileField(upload_to='media/', default='song')
     likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
-    album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album')
+    album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', default=None)
 
     class Meta:
         ordering = ['uploaded_on']
-        unique_together = ('artist_name', 'artist_surname')
+        unique_together = ('first_name_artist', 'last_name_artist')
+
 
     def __str__(self):
         return self.title
@@ -24,16 +34,13 @@ class Song(models.Model):
 
 
 class Album(models.Model):
-    artist = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField(auto_now=True)
-    genre = models.CharField(max_length=20)
+    genre = models.CharField(max_length=5, choices=GENRE, default=None)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
     image = models.ImageField(upload_to='django-image/', default='https://streaming-music-app.s3.eu-west-1.amazonaws.com/static/image/spotiflix.jpg' )
     description = models.TextField(default='description')
     
-    
-
     class Meta:
         ordering = ['created_on']
 
@@ -42,7 +49,6 @@ class Album(models.Model):
     
     def __str__(self):
         return self.title
-
 
     
 
