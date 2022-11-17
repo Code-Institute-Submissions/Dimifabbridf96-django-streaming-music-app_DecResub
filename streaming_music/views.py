@@ -10,7 +10,7 @@ from .forms import *
 
 class AlbumList(generic.ListView):
     model = Album
-    paginate_by = 10
+    paginate_by = 6
     queryset = Album.objects.order_by('created_on')
     template_name = 'albums.html'
 
@@ -40,6 +40,8 @@ def addAlbum(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             image = request.FILES['image']
+            if image.content_type == 'audio/mpeg':
+                messages.error(request, 'Image not added, file needs to a jpg file, please try again')
             description = form.cleaned_data['description']
             genre = form.cleaned_data['genre']
             form.save()

@@ -41,7 +41,7 @@ class Album(models.Model):
     created_on = models.DateField(auto_now=True)
     genre = models.CharField(max_length=5, choices=GENRE, default=None)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
-    image = models.ImageField(upload_to='django-image/', default='https://streaming-music-app.s3.eu-west-1.amazonaws.com/static/image/spotiflix.jpg' )
+    image = models.ImageField(upload_to='django-image/', default='default' )
     description = models.TextField(default='description')
     
     class Meta:

@@ -5,9 +5,13 @@
     <div class="row">
          <div class="col-12 md-8 left">
             <div class="row">
+            <div class = 'add'>
+                <a href="/add" class="albums"> Add Album</a>
+                <a href="/add1" class="songs">Add Song</a>
+            </div>
                 {% for album in album_list %}
                 
-                <div class="col-6 md-4">
+                <div class="col-md-6 sm-4">
                     {% if 'Rock' in album.genre %}
                     <div class="card rock">
                     {% elif 'Metal' in album.genre %}
@@ -46,8 +50,6 @@
                     </div>
                 </div>
                 {% endfor %}
-                <a href="/add"> Add Album</a>
-                <a href="/add1">Add Song</a>
             </div>
 
          </div>

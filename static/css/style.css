@@ -28,7 +28,33 @@ a{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
 
+.add{
+    display: flex;
+    font-size: 30px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.albums:hover{
+    text-shadow: 2px 2px 5px red;
+}
+.songs:hover{
+    text-shadow: 2px 2px 5px red;
+}
+
+.card:hover,
+.card:focus{
+    box-shadow: 10px 20px 10px -4px black;
+  transform: translateY(-0.25em);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--hover); }
+  }
+.col-md-6{
+    padding: 20px;
 }
 .gray{
     background-color: #e6e6cd;
