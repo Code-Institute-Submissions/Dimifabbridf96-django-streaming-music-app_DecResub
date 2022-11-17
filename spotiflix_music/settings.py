@@ -157,32 +157,34 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = 'streaming-music-app'
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = 'public-read'
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400'
-}
+#AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID")
+#AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
+#AWS_STORAGE_BUCKET_NAME = 'streaming-music-app'
+#AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#AWS_S3_FILE_OVERWRITE = False
+#AWS_DEFAULT_ACL = 'public-read'
+#AWS_S3_OBJECT_PARAMETERS = {
+#    'CacheControl': 'max-age=86400'
+#}
+#
+#AWS_LOCATION = 'static'
+#
+#AWS_QUERYSTRING_AUTH = False
+#
+#AWS_HEADERS = {
+#    'Access-Control-Allow-Origin': '*',
+#}
 
-AWS_LOCATION = 'static'
+#STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+STATIC_URL = '/static/'
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-AWS_QUERYSTRING_AUTH = False
-
-AWS_HEADERS = {
-    'Access-Control-Allow-Origin': '*',
-}
-
-STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
