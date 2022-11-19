@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from PIL import Image
 from .models import *
 from .forms import *
 
@@ -18,7 +19,7 @@ class AlbumList(generic.ListView):
 class AlbumView(View):
     def get(self, request, title, *args, **kwargs):
         queryset = Album.objects.order_by('created_on')
-        album = get_object_or_404(queryset, title=title)
+        album = get_object_or_404(Album, title=title)
         songs = Song.objects.all().filter(album=album)
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
@@ -33,18 +34,31 @@ class AlbumView(View):
             }
         )
 
+    def post(self, request, title, *args, **kwargs):
+        album = get_object_or_404(Album, title=title)
+        liked = False
+        if album.likes.filter(id=self.request.user.id).exists():
+            album.likes.remove(request.user)
+        else:
+            album.likes.add(request.user)
+        return HttpResponseRedirect(reverse('home'))
+
 
 def addAlbum(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data['title']
-            image = request.FILES['image']
-            if image.content_type == 'audio/mpeg':
-                messages.error(request, 'Image not added, file needs to a jpg file, please try again')
             description = form.cleaned_data['description']
-            genre = form.cleaned_data['genre']
-            form.save()
+            genre = form.cleaned_data['genre'] 
+            image = form.cleaned_data['image']
+            if image.content_type not in ['image/jpeg', 'image/png']:
+                messages.error(request, 'Image not added, file needs to be jpg, please try again')
+            elif image.content_type == 'audio/mpeg':
+                messages.error(request, 'Image not added, file needs to be jpg, please try again')
+            else:
+                form.save()
+                messages.success(request, 'Image added succesfully')
         return redirect('/')
     return render(request, 'add-album.html',
     {
@@ -98,3 +112,13 @@ def addSong(request):
     {
         'song_form': SongForm()
     })
+
+
+class AlbumLike(View):
+    def post(self, request, title):
+        album = get_object_or_404(Album, title=title)
+        if album.likes.filter(id=request.user.id).exists():
+            album.likes.remove(request.user)
+        else:
+            album.likes.add(request.user)
+        return HttpResponseRedirect(reverse('home'))

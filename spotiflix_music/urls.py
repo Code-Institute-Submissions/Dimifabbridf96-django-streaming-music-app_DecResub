@@ -23,6 +23,7 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),  
     path('add1/', addSong, name='add1'),  
     path('add/', addAlbum, name='add'),
+   # path{'like/<slug:title>', AlbumLike, name='albums_like'},
     path('<slug:title>/add1/', addSong, name='add1'),
     path('<slug:title>/delete/<int:id>', removeSong, name='delete_song'),
     path('<slug:title>/remove/<int:id>', deleteAlbum, name='delete_album'),

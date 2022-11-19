@@ -41,7 +41,7 @@ class Album(models.Model):
     created_on = models.DateField(auto_now=True)
     genre = models.CharField(max_length=5, choices=GENRE, default=None)
     likes = models.ManyToManyField(User, related_name='album_likes', blank=True)
-    image = models.ImageField(upload_to='django-image/', default='default' )
+    image = models.ImageField(upload_to='django-image/', default='default')
     description = models.TextField(default='description')
     
     class Meta:

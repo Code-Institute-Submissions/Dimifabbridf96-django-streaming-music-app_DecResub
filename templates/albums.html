@@ -2,13 +2,14 @@
 {% block content %}
 
 <div class="container-fluid">
+    {% if user.is_authenticated %}
     <div class="row">
          <div class="col-12 md-8 left">
-            <div class="row">
             <div class = 'add'>
                 <a href="/add" class="albums"> Add Album</a>
                 <a href="/add1" class="songs">Add Song</a>
             </div>
+    {% endif %}
                 {% for album in album_list %}
                 
                 <div class="col-md-6 sm-4">
@@ -43,10 +44,25 @@
                                 <p class="card-text">
                                     {{ album.description }}
                                 </p>
-                                <p class="card-text text-muted h6">{{ album.created_on}} <i class="far fa-heart"></i>
-                                    {{ album.number_of_likes }}</p>
-                            </div>
+                                <div class="row">
+                                <div class="col-1">
+                                    <strong>
+                                        {% if user.is_authenticated %}
+                                        <form action="{% url 'albums' album.title %}" class="d-inline" method="POST">
+                                            {% csrf_token %}
+                                            {% if liked %}
+                                            <button type="submit" name="album_id" value="{{album.title}}" class="btn-like" ><i class="fas fa-heart"></i></button>
+                                            {% else %}
+                                            <button type="submit" name="album_id" value="{{album.title}}" class="btn-like" ><i class="far fa-heart"></i></button>
+                                                {% endif %}
+                                        </form>
+                                        {% else %}
+                                        <span class="text-secondary"><i class="far fa-heart"></i></span>
+                                        {% endif %}
+                                         <span class="text-secondary">{{ album.number_of_likes }} </span>
+                                    </strong>
                         </div>
+                    </div>
                     </div>
                 </div>
                 {% endfor %}

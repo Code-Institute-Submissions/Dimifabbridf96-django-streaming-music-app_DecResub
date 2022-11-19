@@ -1,3 +1,9 @@
+img{
+    max-width: 250px;
+}
+.nav{
+    flex-direction: column;
+}
 .nav-link{
     color: black;
     font-size: 30px;
@@ -71,11 +77,32 @@ a{
     background-color: black;
 }
 .jazz{
-    background-color: #cccc20;
+    background-color: #ccc000;
 }
 .house{
     background-color: gray;
 }
 .blues{
     background-color: #3232ff;
+}
+
+@media screen and (max-width: 767px){
+    .links{
+        margin-left: 163px;
+    }
+}
+
+@media screen and (max-width: 499px){
+    .top{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 468px){
+    .logo{
+        margin-left: 66px;
+    }
+    .copyright{
+        margin-left: 100px;
+    }
 }
