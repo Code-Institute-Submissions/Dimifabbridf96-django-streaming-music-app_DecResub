@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+    <h1>Edit Album:</h1>
+    <p> Creator: {{ user.username }}</p>
+    <form method="POST" action="">
+
+        {{ form | crispy }}
+        {% csrf_token %}
+
+        <button class="btn btn-signup btn-lg" type="submit"> Edit the album </button>
+    </form>
+{% endblock %}

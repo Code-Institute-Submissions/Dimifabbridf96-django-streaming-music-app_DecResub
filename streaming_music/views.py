@@ -67,29 +67,25 @@ def addAlbum(request):
     )
 
 
+def editAlbum(request, album_id):
+    
+    album = get_object_or_404(Album, id=album_id)
+    if request.method == 'POST':
+        form = AlbumForm(request.POST, instance=album)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+    form = AlbumForm(instance=album)
+    context = {
+        'form': form
+    }
+
+    return render(request, 'edit-album.html', context)
+
+
 def deleteAlbum(request, id, title):
     album = Album.objects.get(id=id)
     album.delete()
-    return redirect('/')
-
-##def addArtist(request):
-##    if request.method == 'POST':
-##        first_name = form2.cleaned_data['first_name']
-##        last_name = form2.cleaned_data['last_name']
-##        form1 = ArtistForm(request.POST, request.FILES)
-##        form1.save()
-##        return redirect('/')
- #   
- #   return render(request, 'add-album.html',
- #   {
- #       'album_form': ArtistForm()
- #   }
- #   )
-
-
-def removeSong(request, id, title):
-    song = Song.objects.get(id=id)
-    song.delete()
     return redirect('/')
 
 
@@ -112,6 +108,30 @@ def addSong(request):
     {
         'song_form': SongForm()
     })
+
+
+def editSong(request, id):
+    
+    #album = get_object_or_404(Album, title=title)
+    song = get_object_or_404(Song, id=id)
+
+    if request.method == 'POST':
+        form = SongForm(request.POST, instance=song)
+        if form.is_valid():
+            form.save()
+        return redirect('/')
+    form = SongForm(instance=song)
+    context = {
+        'form': form
+    }
+
+    return render(request, 'edit-song.html', context)
+
+
+def removeSong(request, id, title):
+    song = Song.objects.get(id=id)
+    song.delete()
+    return redirect('/')
 
 
 class AlbumLike(View):
