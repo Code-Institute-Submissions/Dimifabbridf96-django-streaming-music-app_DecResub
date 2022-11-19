@@ -86,6 +86,10 @@ a{
     background-color: #3232ff;
 }
 
+.padding{
+    padding: 20px;
+}
+
 @media screen and (max-width: 767px){
     .links{
         margin-left: 163px;

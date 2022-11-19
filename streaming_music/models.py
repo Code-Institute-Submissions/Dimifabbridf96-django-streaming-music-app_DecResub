@@ -14,7 +14,7 @@ GENRE = [
 
 class Song(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    first_name_artist = models.CharField(max_length=501)
+    first_name_artist = models.CharField(max_length=50)
     last_name_artist = models.CharField(max_length=50)
     uploaded_on = models.DateTimeField(auto_now=True)
     approved = models.BooleanField(default=False)
