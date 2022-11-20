@@ -1,6 +1,7 @@
 img{
     max-width: 250px;
 }
+
 .nav{
     flex-direction: column;
 }
@@ -56,9 +57,13 @@ a{
   transform: translateY(-0.25em);
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 var(--hover); }
-  }
+
+.btn-like{
+    color: #E84610;
+    border: none;
+    background: transparent;
+}
+
 .col-md-6{
     padding: 20px;
 }
@@ -68,7 +73,7 @@ a{
     padding: 5px;
 }
 .rock{
-    background-color: #b20000;
+    background-color: blue;
 }
 .pop{
     background-color: #00b2b2;
@@ -90,6 +95,7 @@ a{
     padding: 20px;
 }
 
+
 @media screen and (max-width: 767px){
     .links{
         margin-left: 163px;
@@ -108,5 +114,8 @@ a{
     }
     .copyright{
         margin-left: 100px;
+    }
+    audio{
+        max-width: 220px;
     }
 }

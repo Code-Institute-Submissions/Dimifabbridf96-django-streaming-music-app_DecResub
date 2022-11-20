@@ -24,6 +24,7 @@ class AlbumView(View):
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
             liked = True
+
         return render(
             request,
             'albums_content.html',
@@ -38,27 +39,40 @@ class AlbumView(View):
         album = get_object_or_404(Album, title=title)
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
+            liked = True
+        
+        return render(
+            request,
+            'albums_content.html',
+            {
+                'album': album,
+                'songs': songs,
+                'liked': liked,
+            }
+        )
+
+
+class AlbumLike(View):
+    def post(self, request, title):
+        album = get_object_or_404(Album, title=title)
+        if album.likes.filter(id=request.user.id).exists():
             album.likes.remove(request.user)
         else:
             album.likes.add(request.user)
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('albums', args=[title]))
 
 
 def addAlbum(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST, request.FILES)
+        creator = request.user.id
         if form.is_valid():
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             genre = form.cleaned_data['genre'] 
             image = form.cleaned_data['image']
-            if image.content_type not in ['image/jpeg', 'image/png']:
-                messages.error(request, 'Image not added, file needs to be jpg, please try again')
-            elif image.content_type == 'audio/mpeg':
-                messages.error(request, 'Image not added, file needs to be jpg, please try again')
-            else:
-                form.save()
-                messages.success(request, 'Image added succesfully')
+            form.save()
+            messages.success(request, 'Image added succesfully')
         return redirect('/')
     return render(request, 'add-album.html',
     {
@@ -132,13 +146,3 @@ def removeSong(request, id, title):
     song = Song.objects.get(id=id)
     song.delete()
     return redirect('/')
-
-
-class AlbumLike(View):
-    def post(self, request, title):
-        album = get_object_or_404(Album, title=title)
-        if album.likes.filter(id=request.user.id).exists():
-            album.likes.remove(request.user)
-        else:
-            album.likes.add(request.user)
-        return HttpResponseRedirect(reverse('home'))

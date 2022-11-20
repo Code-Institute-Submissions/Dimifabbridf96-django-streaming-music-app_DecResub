@@ -5,7 +5,7 @@ from .models import *
 class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        fields = ('title', 'image', 'description', 'genre')
+        fields = ('title', 'image', 'description', 'genre', 'creator')
 
 
 class SongForm(forms.ModelForm):

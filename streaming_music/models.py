@@ -35,7 +35,7 @@ class Song(models.Model):
 
 
 class Album(models.Model):
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL,
+    creator = models.ForeignKey(User,
         on_delete=models.CASCADE, related_name='creator')
     title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField(auto_now=True)
