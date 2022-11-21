@@ -111,7 +111,8 @@ def addSong(request):
             last_name_artist = form2.cleaned_data['last_name_artist']
             album = form2.cleaned_data['album']
             file = request.FILES.get('file')
-            if file.content_type == 'audio/mpeg':
+            print(file)
+            if file and file.content_type == 'audio/mpeg':
                 form2.save()
                 messages.success(request, 'Song added succesfully')
             else:
