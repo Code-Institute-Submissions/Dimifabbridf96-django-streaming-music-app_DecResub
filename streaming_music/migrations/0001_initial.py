@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
                 ('genre', models.CharField(choices=[('Rock', 'Rock'), ('Jazz', 'Jazz'), ('Pop', 'Pop'), ('House', 'House'), ('Blues', 'Blues'), ('Metal', 'Metal'), ('Other', 'Other')], default=None, max_length=5)),
                 ('image', models.ImageField(default='https://streaming-music-app.s3.eu-west-1.amazonaws.com/static/image/spotiflix.jpg', upload_to='django-image/')),
                 ('description', models.TextField(default='description')),
-                ('creator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='creator', to=settings.AUTH_USER_MODEL)),
                 ('likes', models.ManyToManyField(blank=True, related_name='album_likes', to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -35,7 +34,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=50, unique=True)),
-                ('first_name_artist', models.CharField(max_length=501)),
+                ('first_name_artist', models.CharField(max_length=50)),
                 ('last_name_artist', models.CharField(max_length=50)),
                 ('uploaded_on', models.DateTimeField(auto_now=True)),
                 ('approved', models.BooleanField(default=False)),

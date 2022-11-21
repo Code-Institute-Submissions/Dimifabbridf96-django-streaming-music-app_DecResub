@@ -24,19 +24,12 @@ class Song(models.Model):
 
     class Meta:
         ordering = ['uploaded_on']
-        unique_together = ('first_name_artist', 'last_name_artist')
-
 
     def __str__(self):
         return self.title
     
-    def number_of_likes(self):
-        return self.likes.count()
-
 
 class Album(models.Model):
-    creator = models.ForeignKey(User,
-        on_delete=models.CASCADE, related_name='creator')
     title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField(auto_now=True)
     genre = models.CharField(max_length=5, choices=GENRE, default=None)

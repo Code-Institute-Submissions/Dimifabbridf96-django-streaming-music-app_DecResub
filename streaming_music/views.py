@@ -65,7 +65,6 @@ class AlbumLike(View):
 def addAlbum(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST, request.FILES)
-        creator = request.user.id
         if form.is_valid():
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
@@ -111,12 +110,12 @@ def addSong(request):
             first_name_artist = form2.cleaned_data['first_name_artist']
             last_name_artist = form2.cleaned_data['last_name_artist']
             album = form2.cleaned_data['album']
-            file = request.FILES['file']
-            if file.content_type != 'audio/mpeg':
-                messages.error(request, 'Song not added, file needs to be mp3, please try again')
-            else:
+            file = request.FILES.get('file')
+            if file.content_type == 'audio/mpeg':
                 form2.save()
                 messages.success(request, 'Song added succesfully')
+            else:
+                messages.error(request, 'Song not added, file needs to be mp3, please try again')
         return redirect('/')
     return render(request, 'add-song.html',
     {
@@ -124,11 +123,9 @@ def addSong(request):
     })
 
 
-def editSong(request, id):
+def editSong(request, song_id):
     
-    #album = get_object_or_404(Album, title=title)
-    song = get_object_or_404(Song, id=id)
-
+    song = get_object_or_404(Song, id=song_id)
     if request.method == 'POST':
         form = SongForm(request.POST, instance=song)
         if form.is_valid():
