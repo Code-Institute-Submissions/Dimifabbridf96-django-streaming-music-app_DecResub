@@ -40,7 +40,7 @@ class AlbumView(View):
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
             liked = True
-        
+
         return render(
             request,
             'albums_content.html',
@@ -68,7 +68,7 @@ def addAlbum(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
-            genre = form.cleaned_data['genre'] 
+            genre = form.cleaned_data['genre']
             image = form.cleaned_data['image']
             form.save()
             messages.success(request, 'Image added succesfully')
@@ -81,7 +81,7 @@ def addAlbum(request):
 
 
 def editAlbum(request, album_id):
-    
+
     album = get_object_or_404(Album, id=album_id)
     if request.method == 'POST':
         form = AlbumForm(request.POST, instance=album)
@@ -112,7 +112,7 @@ def addSong(request):
             album = form2.cleaned_data['album']
             file = request.FILES.get('file')
             print(file)
-            if file and file.content_type == 'audio/mpeg':
+            if None in file or file.content_type == 'audio/mpeg':
                 form2.save()
                 messages.success(request, 'Song added succesfully')
             else:
@@ -125,7 +125,7 @@ def addSong(request):
 
 
 def editSong(request, song_id):
-    
+
     song = get_object_or_404(Song, id=song_id)
     if request.method == 'POST':
         form = SongForm(request.POST, instance=song)
