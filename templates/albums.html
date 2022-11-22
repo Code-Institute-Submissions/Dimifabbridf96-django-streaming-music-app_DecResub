@@ -11,8 +11,8 @@
             </div>
     {% endif %}
                 {% for album in album_list %}
-                
-                <div class="col-md-6 sm-4">
+                <div class="row d-flex justify-content-around">
+                <div class="col-md-6 sm-4 ">
                     {% if 'Rock' in album.genre %}
                     <div class="card rock">
                     {% elif 'Metal' in album.genre %}
@@ -28,10 +28,11 @@
                     {% else %}
                     <div class="card">
                         {% endif %}
+                    </div>
                         {% if "default" in album.image.url %}
                         <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
                         {% else %}
-                        <img src="{{ album.image.url }}" alt="album image" class="card-img-top">
+                        <img src="{{ album.image.url }}" alt="album image" class="card-img-top img-fluid ">
                         {% endif %}
                         
                         <div class="card-body">
