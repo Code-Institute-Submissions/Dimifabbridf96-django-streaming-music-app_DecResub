@@ -32,7 +32,7 @@
                         {% if "default" in album.image.url %}
                         <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
                         {% else %}
-                        <img src="{{ album.image.url }}" alt="album image" class="card-img-top img-fluid ">
+                        <img src="{{ album.image.url }}" alt="album image" class="card-img-top img-fluid max-width: 75%; height: auto; ">
                         {% endif %}
                         
                         <div class="card-body">
