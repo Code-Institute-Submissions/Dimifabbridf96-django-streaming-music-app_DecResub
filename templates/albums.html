@@ -27,8 +27,8 @@
                     <div class="card house">
                     {% else %}
                     <div class="card">
-                        {% endif %}
-                    </div>
+                    {% endif %}
+                    
                         {% if "default" in album.image.url %}
                         <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
                         {% else %}
@@ -46,11 +46,12 @@
                                 </a>                           
                                 <p class="card-text">
                                     {{ album.description }}
-                                </p>
+                                </p>   
                     </div>
                 </div>
                 </div>
             </div>
+        </div>
                 {% endfor %}
             </div>
 
