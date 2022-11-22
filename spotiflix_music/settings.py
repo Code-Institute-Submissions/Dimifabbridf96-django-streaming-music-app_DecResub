@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'reset_migrations',
     'allauth.socialaccount',
     'django.contrib.staticfiles',
     'django_summernote',
