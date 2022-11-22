@@ -26,9 +26,6 @@ Spotiflix is a web page that allows the user to upload songs and create albums t
 * Tested in models the actual creation of a string from the song model contained the song title
 
 
-# Deployment
-
-This project was deployed using Code Institute's mock terminal for Heroku.
 
 # Credits
 

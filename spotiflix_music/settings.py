@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_summernote',
     'crispy_forms',
+    'custom.storages.py'
     'streaming_music',
     'storages',
 ]

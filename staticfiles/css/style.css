@@ -1,0 +1,125 @@
+img{
+    max-width: 250px;
+}
+
+.nav{
+    flex-direction: column;
+}
+.nav-link{
+    color: black;
+    font-size: 30px;
+}
+.navbar-brand{
+    font-size: 40px;
+}
+.navbar-collapse{
+    justify-content: flex-end;
+}
+
+.album{
+    background-color: #c0c0b2;
+    text-align: center;
+}
+
+.card-img-top{
+    max-height: 150px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+.two{
+    width: 50%;
+    height: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add{
+    display: flex;
+    font-size: 30px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.albums:hover{
+    text-shadow: 2px 2px 5px red;
+}
+.songs:hover{
+    text-shadow: 2px 2px 5px red;
+}
+
+.card:hover,
+.card:focus{
+    box-shadow: 10px 20px 10px -4px black;
+  transform: translateY(-0.25em);
+}
+
+
+.btn-like{
+    color: #E84610;
+    border: none;
+    background: transparent;
+}
+
+.bottom{
+    margin-bottom: 10px ;
+}
+
+.col-md-6{
+    padding: 20px;
+}
+.gray{
+    background-color: #e6e6cd;
+    margin: 10px;
+    padding: 5px;
+}
+.rock{
+    background-color: #D2042D;
+}
+.pop{
+    background-color: #00b2b2;
+}
+.metal{
+    background-color: black;
+}
+.jazz{
+    background-color: #ccc000;
+}
+.house{
+    background-color: gray;
+}
+.blues{
+    background-color: #3232ff;
+}
+
+.padding{
+    padding: 20px;
+}
+
+
+@media screen and (max-width: 767px){
+    .links{
+        margin-left: 163px;
+    }
+}
+
+@media screen and (max-width: 499px){
+    .top{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 468px){
+    .logo{
+        margin-left: 66px;
+    }
+    .copyright{
+        margin-left: 100px;
+    }
+    audio{
+        max-width: 220px;
+    }
+}
