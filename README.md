@@ -9,6 +9,17 @@ Spotiflix is a web page that allows the user to upload songs and create albums t
 <img src = "static/image/second_page.png" alt = "page album content site">
 
 
+# Tecnology used:
+
+1. Django Framework
+2. AllAuth
+3. Elephant Postgres
+4. Bootstrap
+5. JS
+6. CSS
+7. HTML
+8. Phyton
+
 
 ## User Experience (UX)
 
@@ -59,14 +70,43 @@ the user can recognize all different genres from the color of the album.
 * Tested in models the actual creation of a string from the song model contained the song title
 * Tested in forms the requirements of all the fields to have the form validated
 * The only thing I didn't know how to test is the like functionality, the reason why the overall is not 100% and in the view file I have a percentage of 69%
+* One error occured when test the edit song functionality, the song is updated only if the file field is filled again, otherwhise an error is raised for MultiDictionary values.
 
 <img src = "static/image/testing.png" alt = "testing page with results">
 
+# Bugs
+
+## Solved bugs
+* Found a bug that allow the user to add an image instead of a mp3 file in the Song Form, solved creating a validation that check the file content of the file uploaded restricting the allowed only audio/mpeg content, showing to the user a message in the home page, if succesfully ('Song added succesfully'), if unsuccesfully ('Song not added, file needs to be mp3, please try again')
+
+## Remaining bugs
+* In the edit process of the song if the file is not reuploaded the form raise an error
+* Unfortunately trying to use a technology not yet studied as the AWS bucket, my page stiling in some aspect is difficult to modify, found anyway some help with inline styling using bootstrap.   
 
 
- 
+# Deployment
+
+ * Steps for deployment:
+    1. Push the code done on GitHub
+    2. Create a New Heroku app
+    3. Connect your GitHub account to your Heroku account
+    4. Select the repository 
+    5. Click on Deploy.
+    6. The live site page can be found on - https://spotiflix-app.herokuapp.com/.
+
+
+## Content 
+
+* Checked on - https://codepen.io/giana/pen/BZaGyP some advise about the shadowing.
+* Found an exhaustive explaination of how to build up some core functionality reading the documentation of Django, Boto3 for upload the mp3 file and image on AWS S3 bucket ( great thanks also to the tutor support for help me out when I add struggle to show my style.css file).
+* in-depth study about some doubts during the development of the project with the help of https://www.w3schools.com/
+
+## Media 
+
+* Example songs to show the Play and download functionality downloaded from - https://www.soundhelix.com/audio-examples
+
+
 # Credits
-
 * Code Institute for the deployment terminal
 * My mentor Jack Wachira for his precious advice and the essential preliminary chat for every project I develop since the start of his mentoring.
 * The tutors from Code Institute that with patience they helped me in some debugging situations
