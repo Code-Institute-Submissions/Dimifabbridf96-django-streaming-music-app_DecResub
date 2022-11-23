@@ -68,16 +68,6 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/')
         existing_items = Song.objects.filter(id=song.id)
         self.assertEqual(len(existing_items), 0)
-    
-    def test_can_edit_song(self):
-        audio = SimpleUploadedFile(name="file.mp3", content=b'', content_type="audio/mpeg")
-        image = SimpleUploadedFile(name="file.jpg", content=b'', content_type="image/jpeg")
-        album = Album.objects.create(title='Youngblood' , image=image , description='description', genre='Pop')
-        song = Song.objects.create(title='Youngblood', first_name_artist='Dimi', last_name_artist='Fabbri', file= audio, album=album)
-        response = self.client.post(f'/edit1/{song.id}', {'title':'Young', 'first_name_artist':'Dimi', 'last_name_artist':'Fabbri', 'file':'audio', 'album':album})
-        self.assertRedirects(response, '/')
-        updated_item = Song.objects.get(id=song.id)
-        self.assertEqual(updated_item.title, 'Young')
         
     def test_get_edit_song_page(self):
         image = SimpleUploadedFile(name="file.jpg", content=b'', content_type="image/jpeg")

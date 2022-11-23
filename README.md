@@ -27,6 +27,9 @@ the user can recognize all different genres from the color of the album.
 
 
 * The seventh and eighth is the possibility for the users to edit albums and songs, having the opportunity to make small changes as for misspellings or typos in the excitement to share their favorite songs and albums.
+
+<img src = "static/image/edit-button.png" alt = "edit button for album">
+
 * The ninth feature is focus on the opportunity for the users to leave a like on their favorite albums and show appreciation to the creator of it.
 * The tenth is, at this point, for all the users see the number of likes left on a single album, highlighting the best album to discover
 * The last two feature are the opportunity for the users to delete albums and songs if not necessary anymore.
@@ -59,6 +62,9 @@ the user can recognize all different genres from the color of the album.
 
 <img src = "static/image/testing.png" alt = "testing page with results">
 
+
+
+ 
 # Credits
 
 * Code Institute for the deployment terminal
