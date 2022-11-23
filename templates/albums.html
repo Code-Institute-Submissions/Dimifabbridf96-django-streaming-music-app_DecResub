@@ -16,7 +16,7 @@
                     {% if 'Rock' in album.genre %}
                     <div class="card rock">
                     {% elif 'Metal' in album.genre %}
-                    <div class="card metal text-white">
+                    <div class="card metal">
                     {% elif 'Pop' in album.genre %}
                     <div class="card pop">
                     {% elif 'Jazz' in album.genre %}
@@ -36,8 +36,8 @@
                         {% endif %}
                         
                         <div class="card-body">
-                            <div class="card-body">
-                                <a href="{% url 'albums' album.title %}">
+                            <div class="card-body text-white">
+                                <a href="{% url 'albums' album.title %}" class="text-white">
                                 <h3>{{ album.title }}</h3>
                                 <h3>{{ album.genre }}</h3> 
                                 <a href="edit/{{ album.id }}"> 
