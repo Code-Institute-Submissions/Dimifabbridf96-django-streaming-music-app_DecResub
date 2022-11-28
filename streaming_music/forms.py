@@ -12,3 +12,8 @@ class SongForm(forms.ModelForm):
     class Meta:
         model = Song
         fields = ('title', 'first_name_artist', 'last_name_artist', 'file', 'album')
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('body',)

@@ -43,7 +43,13 @@
                                 <a href="{% url 'albums' album.id %}" class="text-white">
                                 {% endif %}
                                 <h3>{{ album.title }}</h3>
-                                <h3>{{ album.genre }}</h3> 
+                                <h3>{{ album.genre }}</h3>
+                                <div class="mb-2">
+                                <strong>
+                                <span class="text-secondary"><i class="far fa-heart"></i></span>
+                                <span class="text-secondary">{{ album.number_of_likes }} </span>
+                                </strong>
+                                </div>
                                 <a href="edit/{{ album.id }}"> 
                                     <button class="btn btn-warning bottom">Edit Album </button>
                                 </a> 

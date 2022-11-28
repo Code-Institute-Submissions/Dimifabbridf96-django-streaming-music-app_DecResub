@@ -21,3 +21,13 @@ class SongAdmin(admin.ModelAdmin):
 
     def approve_song(request, self, queryset):
         queryset.update(approved=True)
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'body', 'album', 'created_on', 'approved')
+    list_filter = ('approved', 'created_on')
+    search_fields = ('name', 'email address', 'body')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(approved=True)

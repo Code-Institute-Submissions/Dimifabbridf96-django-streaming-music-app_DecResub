@@ -13,7 +13,6 @@
                     {% endif %}
                 <div class="album">
                     <h1>album title: {{ album.title }}</h1>
-                    <h2> Composer: {{ user.username }}</h2>
                     <h2> Created on: {{ album.created_on }}</h2>
                     <a href="remove/{{ album.id }}"><button class="btn btn-danger btn-lg bottom">Remove</button></a>
                     </div>
@@ -34,7 +33,14 @@
                                 {% endif %}
                                 <span class="text-secondary">{{ album.number_of_likes }} </span>
                             </strong>
-                </div>
+                        </div>
+                            <div class="col-1">
+                                {% with comments.count as total_comments %}
+                                <strong class="text-secondary"><i class="far fa-comments"></i>
+                                <span class="text-secondary">{{ total_comments }}</span>   
+                                </strong>
+                                {% endwith %}
+                
             </div>
 
             </div>
@@ -64,11 +70,56 @@
                     <a href="delete/{{ song.id }}"><button class="btn btn-danger btn-lg">Remove</button></a>
                     </div>
                 </div>
-               
-            
-            </div>
-            </div>
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col card mb-4  mt-3 ">
+        <h3>Comments:</h3>
+        <div class="card-body">
+            {% for comment in comments %}
+            <div class="comments" style="padding: 10px;">
+                <p class="font-weight-bold">
+                    {{ comment.name }}
+                    <span class=" text-muted font-weight-normal">
+                        {{ comment.created_on }}
+                    </span> wrote:
+                </p>
+                {{ comment.body | linebreaks }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-4 card mb-4  mt-3 ">
+        <div class="card-body">
+            {% if commented %}
+            <div class="alert alert-success" role="alert">
+                Your comment is awaiting approval
+            </div>
+            {% else %}
+            {% if user.is_authenticated %}
+
+            <h3>Leave a comment:</h3>
+            <p>Posting as: {{ user.username }}</p>
+            <form method="post" style="margin-top: 1.3em;">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+            
+
 {% if is_paginated %}
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
@@ -77,10 +128,8 @@
         {% endif %}
         {% if page_obj.has_next %}
         <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
-
         {% endif %}
+{% endif %}
     </ul>
 </nav>
-{% endif %}
-
 {% endblock %}

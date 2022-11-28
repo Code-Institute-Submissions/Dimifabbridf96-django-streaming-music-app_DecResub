@@ -46,7 +46,7 @@ class TestViews(TestCase):
     def test_get_song_list(self):
         image = SimpleUploadedFile(name="file.jpg", content=b'', content_type="image/jpeg")
         album = Album.objects.create(title='Youngblood', image=image , description='description', genre='Pop')
-        response = self.client.get(f'/{album.title}/')
+        response = self.client.get(f'/{album.id}/')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'albums_content.html')
 
@@ -64,10 +64,19 @@ class TestViews(TestCase):
         image = SimpleUploadedFile(name="file.jpg", content=b'', content_type="image/jpeg")
         album = Album.objects.create(title='Youngblood' , image=image , description='description', genre='Pop')
         song = Song.objects.create(title='Youngblood', first_name_artist='Dimi', last_name_artist='Fabbri', file= 'audio', album=album)
-        response = self.client.get(f'/{album.title}/delete/{song.id}')
+        response = self.client.get(f'/{album.id}/delete/{song.id}')
         self.assertRedirects(response, '/')
         existing_items = Song.objects.filter(id=song.id)
         self.assertEqual(len(existing_items), 0)
+
+    def test_can_edit_song(self):
+        image = SimpleUploadedFile(name="file.jpg", content=b'', content_type="image/jpeg")
+        album = Album.objects.create(title='Youngblood' , image=image , description='description', genre='Pop')
+        song = Song.objects.create(title='Youngblood', first_name_artist='Dimi', last_name_artist='Fabbri', file= 'audio', album=album)
+        response = self.client.post(f'/edit1/{song.id}', {'title':'Youngblood1',  'first_name_artist':'Dimi', 'last_name_artist':'Fabbri', 'file': 'audio', album:album})
+        self.assertRedirects(response, '/')
+        updated_item = Song.objects.get(id=song.id)
+        self.assertEqual(updated_item.title, 'Youngblood1')
         
     def test_get_edit_song_page(self):
         image = SimpleUploadedFile(name="file.jpg", content=b'', content_type="image/jpeg")

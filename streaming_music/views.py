@@ -21,6 +21,7 @@ class AlbumView(View):
         queryset = Album.objects.order_by('created_on')
         album = get_object_or_404(Album, id=id)
         songs = Song.objects.all().filter(album=album)
+        comments = album.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -31,15 +32,30 @@ class AlbumView(View):
             {
                 'album': album,
                 'songs': songs,
+                'comments': comments,
+                'commented': False,
                 'liked': liked,
-            }
+                'comment_form': CommentForm()
+            },
         )
 
     def post(self, request, id, *args, **kwargs):
         album = get_object_or_404(Album, id=id)
+        songs = Song.objects.all().filter(album=album)
+        comments = album.comments.filter(approved=True).order_by('-created_on')
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
             liked = True
+
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment_form.instance.email = request.user.email
+            comment_form.instance.name = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.album = album
+            comment.save()
+        else: 
+            comment_form = CommentForm()
 
         return render(
             request,
@@ -47,8 +63,11 @@ class AlbumView(View):
             {
                 'album': album,
                 'songs': songs,
+                'comments': comments,
+                'commented': True,
                 'liked': liked,
-            }
+                'comment_form': CommentForm()
+            },
         )
 
 
