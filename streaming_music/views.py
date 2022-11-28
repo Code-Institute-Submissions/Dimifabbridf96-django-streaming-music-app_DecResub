@@ -12,14 +12,14 @@ from .forms import *
 class AlbumList(generic.ListView):
     model = Album
     paginate_by = 6
-    queryset = Album.objects.order_by('created_on')
+    queryset = Album.objects.order_by('-created_on')
     template_name = 'albums.html'
 
 
 class AlbumView(View):
-    def get(self, request, title, *args, **kwargs):
+    def get(self, request, id, *args, **kwargs):
         queryset = Album.objects.order_by('created_on')
-        album = get_object_or_404(Album, title=title)
+        album = get_object_or_404(Album, id=id)
         songs = Song.objects.all().filter(album=album)
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
@@ -35,8 +35,8 @@ class AlbumView(View):
             }
         )
 
-    def post(self, request, title, *args, **kwargs):
-        album = get_object_or_404(Album, title=title)
+    def post(self, request, id, *args, **kwargs):
+        album = get_object_or_404(Album, id=id)
         liked = False
         if album.likes.filter(id=self.request.user.id).exists():
             liked = True
@@ -53,13 +53,13 @@ class AlbumView(View):
 
 
 class AlbumLike(View):
-    def post(self, request, title):
-        album = get_object_or_404(Album, title=title)
+    def post(self, request, id):
+        album = get_object_or_404(Album, id=id)
         if album.likes.filter(id=request.user.id).exists():
             album.likes.remove(request.user)
         else:
             album.likes.add(request.user)
-        return HttpResponseRedirect(reverse('albums', args=[title]))
+        return HttpResponseRedirect(reverse('albums', args=[id]))
 
 
 def addAlbum(request):
@@ -87,6 +87,8 @@ def editAlbum(request, album_id):
         form = AlbumForm(request.POST, instance=album)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Album edited succesfully')
+
         return redirect('/')
     form = AlbumForm(instance=album)
     context = {
@@ -96,9 +98,10 @@ def editAlbum(request, album_id):
     return render(request, 'edit-album.html', context)
 
 
-def deleteAlbum(request, id, title):
-    album = Album.objects.get(id=id)
+def deleteAlbum(request, album_id, id):
+    album = Album.objects.get(id=album_id)
     album.delete()
+    messages.success(request, 'Album deleted succesfully')
     return redirect('/')
 
 
@@ -112,11 +115,13 @@ def addSong(request):
             album = form2.cleaned_data['album']
             file = request.FILES.get('file')
             print(file)
-            if file is None or file.content_type == 'audio/mpeg':
-                form2.save()
+            if file is None:
+                messages.error(request, 'Song not added, please upload an mp3 file')
+            elif file.content_type == 'audio/mpeg': 
                 messages.success(request, 'Song added succesfully')
+                form2.save()
             else:
-                messages.error(request, 'Song not added, file needs to be mp3, please try again')
+                messages.error(request, 'Song not added, file needs to be an mp3 file')
         return redirect('/')
     return render(request, 'add-song.html',
     {
@@ -131,6 +136,8 @@ def editSong(request, song_id):
         form = SongForm(request.POST, instance=song)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Song edited succesfully')
+
         return redirect('/')
     form = SongForm(instance=song)
     context = {
@@ -140,7 +147,8 @@ def editSong(request, song_id):
     return render(request, 'edit-song.html', context)
 
 
-def removeSong(request, id, title):
-    song = Song.objects.get(id=id)
+def removeSong(request, song_id, id):
+    song = Song.objects.get(id=song_id)
     song.delete()
+    messages.success(request, 'Song deleted succesfully')
     return redirect('/')

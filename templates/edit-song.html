@@ -5,7 +5,7 @@
 
     <h1>Edit Song:</h1>
     <p> Creator: {{ user.username }}</p>
-    <form method="POST" action="{% url 'add1' %}" enctype="multipart/form-data">
+    <form method="POST" action="" enctype="multipart/form-data">
 
         {{ form | crispy }}
         {% csrf_token %}

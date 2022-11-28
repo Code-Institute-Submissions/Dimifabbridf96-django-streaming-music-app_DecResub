@@ -25,8 +25,8 @@ urlpatterns = [
     path('add', addAlbum, name='add'),
     path('edit/<int:album_id>', editAlbum, name='edit'),
     path('edit1/<int:song_id>', editSong, name='edit1'),
-    path('<slug:title>/delete/<int:id>', removeSong, name='delete_song'),
-    path('<slug:title>/remove/<int:id>', deleteAlbum, name='delete_album'),
+    path('<int:id>/delete/<int:song_id>', removeSong, name='delete_song'),
+    path('<int:id>/remove/<int:album_id>', deleteAlbum, name='delete_album'),
     path('', include('streaming_music.urls'), name='music_urls'),
     path('accounts/', include('allauth.urls')),    
 ]

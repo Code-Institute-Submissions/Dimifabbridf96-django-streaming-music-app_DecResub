@@ -21,7 +21,7 @@
                         <div class="col-1">
                             <strong>
                                 {% if user.is_authenticated %}
-                                <form action="{% url 'albums_like' album.title %}" class="d-inline" method="POST">
+                                <form action="{% url 'albums_like' album.id %}" class="d-inline" method="POST">
                                     {% csrf_token %}
                                     {% if liked %}
                                     <button type="submit" name="album_id" value="{{album.title}}" class="btn-like" ><i class="fas fa-heart"></i></button>
