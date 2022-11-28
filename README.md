@@ -22,7 +22,7 @@ Spotiflix is a web page that allows the user to upload songs and create albums t
 
 ## Agile methodologies
 
-I used an agile methodologie to develop this applocation opening the issues at the start of the project and step by step moving it to In progress and in the end to Done when the feauture was complete.
+I used an agile methodology to develop this application opening the issues at the start of the project and step by step moving it to In progress and the end to Done when the feature was complete.
 
 <img src = "static/image/agile.png" alt = "Agile methodologies schema">
 
@@ -94,6 +94,8 @@ the user can recognize all different genres from the color of the album.
 * Found a bug that allows the user to add an image instead of an mp3 file in the Song Form, solved by creating a validation that checks the file content of the file uploaded restricting the allowed only audio/MPEG content, showing to the user a message in the home page, if successfully ('Song added successfully'), if unsuccessfully ('Song was not added, the file needs to be mp3, please try again')
 
 * Found a bug that raises an error when the album title is more than 1 word, fixed using as distinctive parameter the id instead of the title 
+
+* By mistake on the first creation of my AWS bucket I left the secret key and access key public, solved changing the parameters, and hide it in env.py as per Secret key and Database
 
 ## Remaining bugs
 * At the moment, no new bug discovered
