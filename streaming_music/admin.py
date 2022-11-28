@@ -17,10 +17,7 @@ class SongAdmin(admin.ModelAdmin):
     list_display = ('title', 'first_name_artist','last_name_artist', 'uploaded_on', 'file')
     search_fields = ['song_title','first_name_artist','last_name_artist', 'uploaded_on']
     list_filter = ['title','first_name_artist','last_name_artist', 'uploaded_on']
-    action = ['approve_song']
 
-    def approve_song(request, self, queryset):
-        queryset.update(approved=True)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

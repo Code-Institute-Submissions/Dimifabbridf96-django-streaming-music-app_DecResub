@@ -17,9 +17,7 @@ class Song(models.Model):
     first_name_artist = models.CharField(max_length=50)
     last_name_artist = models.CharField(max_length=50)
     uploaded_on = models.DateTimeField(auto_now=True)
-    approved = models.BooleanField(default=False)
     file = models.FileField(upload_to='media/', default='song')
-    likes = models.ManyToManyField(User, related_name='song_likes', blank=True)
     album = models.ForeignKey("Album", on_delete=models.CASCADE, related_name='album', default=None)
 
     class Meta:
@@ -46,9 +44,9 @@ class Album(models.Model):
     def __str__(self):
         return self.title
 
+
 class Comment(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE,
-                             related_name="comments")
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name="comments")
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

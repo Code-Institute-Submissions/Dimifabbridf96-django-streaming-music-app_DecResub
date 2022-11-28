@@ -12,7 +12,7 @@
     {% endif %}
                 {% for album in album_list %}
                 <div class="row d-flex justify-content-around">
-                <div class="col-md-6 sm-4 ">
+                <div class="col-md-6 sm-4 mb-3 ">
                     {% if 'Rock' in album.genre %}
                     <div class="card rock">
                     {% elif 'Metal' in album.genre %}
@@ -36,7 +36,7 @@
                         {% endif %}
                         
                         <div class="card-body">
-                            <div class="card-body text-white">
+                            <div class="card-body">
                                 {% if 'Other' in album.genre %}
                                 <a href="{% url 'albums' album.id %}">
                                 {% else %}
@@ -44,12 +44,21 @@
                                 {% endif %}
                                 <h3>{{ album.title }}</h3>
                                 <h3>{{ album.genre }}</h3>
+                                {% if 'Other' in album.genre %}
                                 <div class="mb-2">
                                 <strong>
                                 <span class="text-secondary"><i class="far fa-heart"></i></span>
                                 <span class="text-secondary">{{ album.number_of_likes }} </span>
                                 </strong>
                                 </div>
+                                {% else %}
+                                <div class="mb-2">
+                                    <strong>
+                                    <span class="text-secondary text-white"><i class="far fa-heart"></i></span>
+                                    <span class="text-secondary text-white">{{ album.number_of_likes }} </span>
+                                    </strong>
+                                    </div>
+                                {% endif %}
                                 <a href="edit/{{ album.id }}"> 
                                     <button class="btn btn-warning bottom">Edit Album </button>
                                 </a> 
