@@ -20,7 +20,11 @@ Spotiflix is a web page that allows the user to upload songs and create albums t
 7. HTML
 8. Phyton
 
-## Agile
+## Agile methodologies
+
+I used an agile methodologie to develop this applocation opening the issues at the start of the project and step by step moving it to In progress and in the end to Done when the feauture was complete.
+
+<img src = "static/image/agile.png" alt = "Agile methodologies schema">
 
 ## User Experience (UX)
 
