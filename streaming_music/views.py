@@ -19,6 +19,9 @@ class AlbumList(generic.ListView):
 
 class AlbumView(View):
     def get(self, request, id, *args, **kwargs):
+        """
+        get the content of the album request 
+        """
         queryset = Album.objects.order_by('created_on')
         album = get_object_or_404(Album, id=id)
         songs = Song.objects.all().filter(album=album)
@@ -41,6 +44,9 @@ class AlbumView(View):
         )
 
     def post(self, request, id, *args, **kwargs):
+        """
+        post the likes and comment of the album request
+        """
         album = get_object_or_404(Album, id=id)
         songs = Song.objects.all().filter(album=album)
         comments = album.comments.filter(approved=True).order_by('-created_on')
@@ -74,6 +80,9 @@ class AlbumView(View):
 
 class AlbumLike(View):
     def post(self, request, id):
+        """
+        post the likes from request.user
+        """
         album = get_object_or_404(Album, id=id)
         if album.likes.filter(id=request.user.id).exists():
             album.likes.remove(request.user)
@@ -84,6 +93,9 @@ class AlbumLike(View):
 
 @login_required(login_url="/accounts/login/")
 def addAlbum(request):
+    """
+        add the album create from the user
+        """
     if request.method == 'POST':
         form = AlbumForm(request.POST, request.FILES)
         if form.is_valid():
@@ -106,6 +118,9 @@ def addAlbum(request):
 
 @login_required(login_url="/accounts/login/")
 def editAlbum(request, album_id):
+    """
+        edit the album requested 
+        """
 
     album = get_object_or_404(Album, id=album_id)
     if request.method == 'POST':
@@ -125,6 +140,9 @@ def editAlbum(request, album_id):
 
 @login_required(login_url="/accounts/login/")
 def deleteAlbum(request, album_id, id):
+    """
+        edit the album requested 
+        """
     album = Album.objects.get(id=album_id)
     album.delete()
     messages.success(request, 'Album deleted succesfully')
@@ -133,6 +151,9 @@ def deleteAlbum(request, album_id, id):
 
 @login_required(login_url="/accounts/login/")
 def addSong(request):
+    """
+    add the song create from the user
+    """
     
     if request.method == 'POST':
         form2 = SongForm(request.POST, request.FILES)
@@ -161,7 +182,9 @@ def addSong(request):
 
 @login_required(login_url="/accounts/login/")
 def editSong(request, song_id):
-
+    """
+        edit the song requested 
+    """
     song = get_object_or_404(Song, id=song_id)
     if request.method == 'POST':
         form = SongForm(request.POST, instance=song)
@@ -180,6 +203,9 @@ def editSong(request, song_id):
 
 @login_required(login_url="/accounts/login/")
 def removeSong(request, song_id, id):
+    """
+        remove the song requested 
+    """
     song = Song.objects.get(id=song_id)
     song.delete()
     messages.success(request, 'Song deleted succesfully')

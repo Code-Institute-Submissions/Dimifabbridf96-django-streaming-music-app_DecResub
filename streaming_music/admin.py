@@ -27,4 +27,7 @@ class CommentAdmin(admin.ModelAdmin):
     actions = ['approve_comments']
 
     def approve_comments(self, request, queryset):
+        """
+        update the approved boolean in True if called
+        """
         queryset.update(approved=True)

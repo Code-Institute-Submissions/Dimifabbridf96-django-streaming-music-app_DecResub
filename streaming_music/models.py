@@ -25,6 +25,9 @@ class Song(models.Model):
         ordering = ['uploaded_on']
 
     def __str__(self):
+        """
+        create a string with title value
+        """
         return self.title
     
 
@@ -44,6 +47,9 @@ class Album(models.Model):
         return self.likes.count()
     
     def __str__(self):
+        """
+        create a string with title value
+        """
         return self.title
 
 
@@ -59,6 +65,9 @@ class Comment(models.Model):
         ordering = ["created_on"]
 
     def __str__(self):
+        """
+        create a string with body value and name value
+        """
         return f"Comment {self.body} by {self.name}"
     
 
