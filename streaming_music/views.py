@@ -142,7 +142,7 @@ def addSong(request):
             last_name_artist = form2.cleaned_data['last_name_artist']
             file = request.FILES.get('file')
             album = form2.cleaned_data['album']
-            if request.user != album.owner: 
+            if request.user != album.owner:
                 messages.error(request, "If you are not the owner of the album you can't add song in it, please select your own album")
                 return redirect('/add1')
             if file is None:

@@ -60,17 +60,23 @@
                                     </strong>
                                     </div>
                                 {% endif %}
-                                {% if album.owner == request.user %}
+                                {% if album.owner == request.user or user.is_superuser %}
                                 <a href="edit/{{ album.id }}"> 
                                     
                                     <button class="btn btn-warning bottom">Edit Album </button>
                                 </a> 
                                 {% else %}
                                 {% endif %}
-                                </a>                           
+                                </a>
+                                {% if 'Metal' in album.genre %}
+                                <p class="text-white">
+                                    {{ album.description }}
+                                {% else %}
                                 <p class="card-text">
                                     {{ album.description }}
-                                </p>   
+                                </p>
+                                {% endif %}
+                                  
                     </div>
                 </div>
                 </div>
