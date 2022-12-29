@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from PIL import Image
 from .models import *
@@ -81,6 +82,7 @@ class AlbumLike(View):
         return HttpResponseRedirect(reverse('albums', args=[id]))
 
 
+@login_required(login_url="/accounts/login/")
 def addAlbum(request):
     if request.method == 'POST':
         form = AlbumForm(request.POST, request.FILES)
@@ -99,6 +101,7 @@ def addAlbum(request):
     )
 
 
+@login_required(login_url="/accounts/login/")
 def editAlbum(request, album_id):
 
     album = get_object_or_404(Album, id=album_id)
@@ -117,6 +120,7 @@ def editAlbum(request, album_id):
     return render(request, 'edit-album.html', context)
 
 
+@login_required(login_url="/accounts/login/")
 def deleteAlbum(request, album_id, id):
     album = Album.objects.get(id=album_id)
     album.delete()
@@ -124,6 +128,7 @@ def deleteAlbum(request, album_id, id):
     return redirect('/')
 
 
+@login_required(login_url="/accounts/login/")
 def addSong(request):
     if request.method == 'POST':
         form2 = SongForm(request.POST, request.FILES)
@@ -148,6 +153,7 @@ def addSong(request):
     })
 
 
+@login_required(login_url="/accounts/login/")
 def editSong(request, song_id):
 
     song = get_object_or_404(Song, id=song_id)
@@ -166,6 +172,7 @@ def editSong(request, song_id):
     return render(request, 'edit-song.html', context)
 
 
+@login_required(login_url="/accounts/login/")
 def removeSong(request, song_id, id):
     song = Song.objects.get(id=song_id)
     song.delete()
