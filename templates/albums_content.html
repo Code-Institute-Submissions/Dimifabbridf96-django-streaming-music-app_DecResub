@@ -14,7 +14,11 @@
                 <div class="album">
                     <h1>album title: {{ album.title }}</h1>
                     <h2> Created on: {{ album.created_on }}</h2>
+                    <h2> Owner: {{ album.owner }}</h2>
+                    {% if album.owner == request.user %}
                     <a href="remove/{{ album.id }}"><button class="btn btn-danger btn-lg bottom">Remove</button></a>
+                    {% else %}
+                    {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-1">
@@ -62,12 +66,18 @@
                     <p>Download me !<a href="{{ song.file.url }}"><i class="fa-solid fa-download"></i></a></p>
                 </div>
                 <div>
+                    {% if album.owner == request.user %}
                     <a href="/edit1/{{ song.id }}">  
                         <button class="btn btn-warning bottom">Edit Song </button>
+                    {% else %}
+                    {% endif %}
                     </a>
                 </div>
                     <div class="col align-self-center">
+                    {% if album.owner == request.user %}
                     <a href="delete/{{ song.id }}"><button class="btn btn-danger btn-lg">Remove</button></a>
+                    {% else %}
+                    {% endif %}
                     </div>
                 </div>
                 {% endfor %}

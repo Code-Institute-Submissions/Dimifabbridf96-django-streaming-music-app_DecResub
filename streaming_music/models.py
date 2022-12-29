@@ -1,6 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth.models import User 
 
 GENRE = [
     ('Rock', 'Rock'),
@@ -11,6 +11,7 @@ GENRE = [
     ('Metal', 'Metal'),
     ('Other', 'Other')
 ]
+
 
 class Song(models.Model):
     title = models.CharField(max_length=50, unique=True)
@@ -28,6 +29,7 @@ class Song(models.Model):
     
 
 class Album(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     title = models.CharField(max_length=200, unique=True)
     created_on = models.DateField(auto_now=True)
     genre = models.CharField(max_length=5, choices=GENRE, default=None)

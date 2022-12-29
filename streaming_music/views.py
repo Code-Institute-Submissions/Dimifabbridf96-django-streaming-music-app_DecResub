@@ -91,8 +91,11 @@ def addAlbum(request):
             description = form.cleaned_data['description']
             genre = form.cleaned_data['genre']
             image = form.cleaned_data['image']
-            form.save()
+            album = form.save(commit=False)
+            album.owner = request.user
+            album.save()
             messages.success(request, 'Image added succesfully')
+            print(album.owner)
         return redirect('/')
     return render(request, 'add-album.html',
     {
@@ -106,7 +109,7 @@ def editAlbum(request, album_id):
 
     album = get_object_or_404(Album, id=album_id)
     if request.method == 'POST':
-        form = AlbumForm(request.POST, instance=album)
+        form = AlbumForm(request.POST, initial={'owner': request.user.username}, instance=album)
         if form.is_valid():
             form.save()
             messages.success(request, 'Album edited succesfully')
