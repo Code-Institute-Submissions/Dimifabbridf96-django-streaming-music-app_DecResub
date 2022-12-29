@@ -60,6 +60,9 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+DEFAULT_FROM_EMAIL = 'example@example.com'
+
 
 MESSAGE_TAGS = {
         messages.DEBUG: 'alert-info',
