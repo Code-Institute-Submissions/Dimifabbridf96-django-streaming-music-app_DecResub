@@ -44,6 +44,7 @@
                                 {% endif %}
                                 <h3>{{ album.title }}</h3>
                                 <h3>{{ album.genre }}</h3>
+                                <h3>{{ album.owner }}</h3>
                                 {% if 'Other' in album.genre %}
                                 <div class="mb-2">
                                 <strong>
@@ -59,9 +60,13 @@
                                     </strong>
                                     </div>
                                 {% endif %}
+                                {% if album.owner == request.user %}
                                 <a href="edit/{{ album.id }}"> 
+                                    
                                     <button class="btn btn-warning bottom">Edit Album </button>
                                 </a> 
+                                {% else %}
+                                {% endif %}
                                 </a>                           
                                 <p class="card-text">
                                     {{ album.description }}

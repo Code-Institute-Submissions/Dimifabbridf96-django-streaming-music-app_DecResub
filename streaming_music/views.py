@@ -109,7 +109,7 @@ def editAlbum(request, album_id):
 
     album = get_object_or_404(Album, id=album_id)
     if request.method == 'POST':
-        form = AlbumForm(request.POST, initial={'owner': request.user.username}, instance=album)
+        form = AlbumForm(request.POST, instance=album)
         if form.is_valid():
             form.save()
             messages.success(request, 'Album edited succesfully')
@@ -133,15 +133,18 @@ def deleteAlbum(request, album_id, id):
 
 @login_required(login_url="/accounts/login/")
 def addSong(request):
+    
     if request.method == 'POST':
         form2 = SongForm(request.POST, request.FILES)
         if form2.is_valid():
             title = form2.cleaned_data['title']
             first_name_artist = form2.cleaned_data['first_name_artist']
             last_name_artist = form2.cleaned_data['last_name_artist']
-            album = form2.cleaned_data['album']
             file = request.FILES.get('file')
-            print(file)
+            album = form2.cleaned_data['album']
+            if request.user != album.owner: 
+                messages.error(request, "If you are not the owner of the album you can't add song in it, please select your own album")
+                return redirect('/add1')
             if file is None:
                 messages.error(request, 'Song not added, please upload an mp3 file')
             elif file.content_type == 'audio/mpeg': 

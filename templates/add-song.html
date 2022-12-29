@@ -5,11 +5,10 @@
 
     <h1>Add Song:</h1>
     <p> Creator: {{ user.username }}</p>
-    <form method="POST" action="{% url 'add1' %}" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data">
 
         {{ song_form | crispy }}
         {% csrf_token %}
-
         <button class="btn btn-signup btn-lg btn-success mt-3" type="submit"> Add the Song </button>
     </form>
 {% endblock %}
