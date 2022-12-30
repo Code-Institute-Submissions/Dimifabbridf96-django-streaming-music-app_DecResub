@@ -124,7 +124,7 @@ def editAlbum(request, album_id):
 
     album = get_object_or_404(Album, id=album_id)
     if request.method == 'POST':
-        form = AlbumForm(request.POST, instance=album)
+        form = AlbumForm(request.POST, request.FILES, instance=album)
         if form.is_valid():
             form.save()
             messages.success(request, 'Album edited succesfully')
@@ -189,7 +189,7 @@ def editSong(request, song_id):
     """
     song = get_object_or_404(Song, id=song_id)
     if request.method == 'POST':
-        form = SongForm(request.POST, instance=song)
+        form = SongForm(request.POST, request.FILES, instance=song)
         if form.is_valid():
             form.save()
             messages.success(request, 'Song edited succesfully')
