@@ -1,9 +1,13 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
+from django.contrib.auth.models import User
 from .models import Album, Song
 
 
 class TestViews(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser', password='12345')
+        login = self.client.login(username='testuser', password='12345')
 
     def test_get_album_list(self):
         response = self.client.get('/')

@@ -86,12 +86,55 @@ the user can recognize all different genres from the color of the album.
 * Tested in forms the requirements of all the fields to have the form validated
 * The only thing I didn't know how to test is the like functionality, the reason why the overall is not 100% and in the view file I have a percentage of 68%
 
+    ## Automatic testing
+<img src = "static/image/automatic tests.png" alt = "automatic tests">
+
+## Manual Tests
+
+* Register a new account
+    Expected: As a user, I want to register an account to join the community, add albums and songs 
+    Test: I tried to register my account with a complete datas request and then with a successful response I tried then to test all the fields one by one leaving it empty to see if the request was passed or if I get an error message to guide me on the step missing    
+    Output: When the registration fields are all complete in the right way the account is created, if any fields are missing is raise an alert message is to guide the user on how to proceed and the steps done wrong
+
+* Access specific functionality only if a logged user
+    Expected: If the user is not logged in can only access the albums to listen for the songs and have an idea of the community, only if the user want to create, edit, delete, leave a comment or a like need to be logged in   
+    Test: From a user not logged in the home page is shown only the albums and their content if clicked, if the user is logged the albums are shown with the edit button present if is owned 
+    Output: As said the output change based on the status of the user if logged or not
+
+
+* Add an album
+Expected: When the user fills all the fields the album is created, if something is missing or there is a wrong insertion in any field a message is raised, only the image field is not required because is set as a default image if the field is empty
+Test: I tried to add an album filling all the fields and everything works fine with a success message as proof, if I post an empty form in the title field a message is raised that asks to compile it, same for the first name artist, last name artist and album, the only field that passes empty is the song field, but a flash message is raised on the home page saying 'Song not added, the file needs to be an mp3 file
+Output: This feature works as expected, as said before
+
+* Add a song
+Expected: When the user fills all the fields the song is created, if something is missing or there is a wrong insertion in any field a message is raised.
+Test: I tried to add a song filling all the fields and everything works fine with a success message as proof, if I post an empty form in the title field a message is raised that asks to compile it
+Output: This feature works as expected, as said before if the user tries to add a song to an album that he does not own a message is raised with a message informing the user that is not possible because not the owner.
+
+* Delete a song or album
+Expected: As a user, I want to have the opportunity to delete a song or album  
+Test: After I create a song or album I click the red button delete, I can anyway delete only the objects that I create from the moment this button is present only on the songs and albums that I own
+Output: The functionality works fine and the object is removed with a message that confirms the deletion
+
+* Edit a song or album
+Expected: As a user, I want to have the opportunity to edit the objects that I own if I have made mistakes when I have at first upload my album or song
+Test: With the dedicated yellow button I tried to edit a song and an album, I can modify the fields 
+Output: The album or song edited to change the output shown
+
+* Opportunity for the superuser/admin to apply all the changes
+Expected: The superuser can add, delete and update all the objects
+Test: Logging in as superuser I tried to execute all the functionality, ones more in the home page are presents in all the albums the button edit, ones entered in an album the user can delete the songs and albums
+Output: As said, to the superuser are shown all the buttons and is allowed to procede with all the functionality 
+
+
+
 <img src = "static/image/testing.png" alt = "testing page with results">
 
 # Bugs
 
 ## Solved bugs
-* Found a bug that allows the user to add an image instead of an mp3 file in the Song Form, solved by creating a validation that checks the file content of the file uploaded restricting the allowed only audio/MPEG content, showing to the user a message in the home page, if successfully ('Song added successfully'), if unsuccessfully ('Song was not added, the file needs to be mp3, please try again')
+* Found a bug that allows the user to add an image instead of an mp3 file in the Song Form, solved by creating a validation that checks the file content of the file uploaded restricting the allowed only audio/MPEG content, showing to the user a message in the home page, if successfully ('Song added successfully'), if unsuccessfully ('Song was not added, the file needs to be mp3, please try again)
 
 * Found a bug that raises an error when the album title is more than 1 word, fixed using as distinctive parameter the id instead of the title 
 
@@ -105,11 +148,25 @@ the user can recognize all different genres from the color of the album.
 
  * Steps for deployment:
     1. Push the code on GitHub
-    2. Create a New Heroku app
+    2. Create a New Heroku app with the current region
     3. Connect your GitHub account to your Heroku account
-    4. Select the repository 
-    5. Click on Deploy.
-    6. The live site page can be found at - https://spotiflix-app.herokuapp.com/.
+    4. Select the repository
+    5. Set up the settings, as the secret key and the Database URL
+    6. The database URL can be defined using Elephantsql
+
+    * Steps for Elephantsql database creation:
+       1. Create an account on - https://www.elephantsql.com/
+       2. Create the database following the steps
+       3. First give a name to your database
+       4. Select the region
+       5. Apply for the Tiny Turtle plan (Free)
+
+    7. Set up the database value manually in the settings of Heroku copying the URL of the database just to create
+    8. After inserting the installed app of the  dependencies installed in the creation of the project and all the values needed to have your app running (check the documentation of every dependency installed for further info)
+    9. Be sure to update the code on GitHub and the database with the command 'python3 manage.py makemigrations, and after the command 'python3 manage.py migrate'
+    10. Go back to Heroku and in the deploy tab set your favorite way to deploy, manual or automatic.
+    11. Click on Deploy.
+    11. The live site page can be found at - https://spotiflix-app.herokuapp.com/.
 
 
 ## Content 

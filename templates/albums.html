@@ -30,7 +30,7 @@
                     {% endif %}
                     
                         {% if "default" in album.image.url %}
-                        <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top">
+                        <img src="https://streaming-music-app.s3.eu-west-1.amazonaws.com/download.jfif" class="card-img-top" alt="default image">
                         {% else %}
                         <img src="{{ album.image.url }}" alt="album image" class="card-img-top img-fluid">
                         {% endif %}
