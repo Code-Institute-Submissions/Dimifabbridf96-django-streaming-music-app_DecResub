@@ -68,11 +68,11 @@
                                 {% else %}
                                 {% endif %}
                                 </a>
-                                {% if 'Metal' or 'Blues' in album.genre %}
-                                <p class="text-white">
+                                {% if 'Other' in album.genre %}
+                                <p class="card-text">
                                     {{ album.description }}
                                 {% else %}
-                                <p class="card-text">
+                                <p class="text-white">
                                     {{ album.description }}
                                 </p>
                                 {% endif %}
